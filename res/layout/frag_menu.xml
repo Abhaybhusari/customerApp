@@ -1,0 +1,294 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1f262f"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/rlProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_profile" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivProfile"
+                    android:text="@string/hello_world"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btChage"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@color/DarkCyan"
+                android:text="Change" />
+
+            <Button
+                android:id="@+id/btLogout"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:background="@color/CornflowerBlue"
+                android:text="Logout" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/bg_separator" />
+
+            <RelativeLayout
+                android:id="@+id/rlPrinter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivPrinter"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_printer" />
+
+                <TextView
+                    android:id="@+id/tvPrinter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivPrinter"
+                    android:text="Printer"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlFavourites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivFavourites"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_favourites" />
+
+                <TextView
+                    android:id="@+id/tvFavourites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivFavourites"
+                    android:text="Favourites"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlBookTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivBookTable"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_booktable" />
+
+                <TextView
+                    android:id="@+id/tvBookTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivBookTable"
+                    android:text="Book Table"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlReserveRoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivReserveRoom"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_booktable" />
+
+                <TextView
+                    android:id="@+id/tvReserveRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivReserveRoom"
+                    android:text="Reserve Room"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlExtendStay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivExtendStay"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_extendstay" />
+
+                <TextView
+                    android:id="@+id/tvExtendStay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivExtendStay"
+                    android:text="Extend Stay"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlRoomBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivRoomBill"
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_roombill" />
+
+                <TextView
+                    android:id="@+id/tvRoomBill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivRoomBill"
+                    android:text="Room Bill"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivAlarm"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_wakeup" />
+
+                <TextView
+                    android:id="@+id/tvAlarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivAlarm"
+                    android:text="Alarm"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/rlAdditionAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivAdditionAccount"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_wakeup" />
+
+                <TextView
+                    android:id="@+id/tvAdditionAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivAdditionAccount"
+                    android:text="Additional Account"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/bg_separator" />
+
+            <RelativeLayout
+                android:id="@+id/rlAboutus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin" >
+
+                <ImageView
+                    android:id="@+id/ivAboutus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/menu_aboutus" />
+
+                <TextView
+                    android:id="@+id/tvAboutUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_toRightOf="@+id/ivAboutus"
+                    android:text="About Hotel"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/bg_separator" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

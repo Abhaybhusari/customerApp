@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f"
+    tools:context=".MainActivity" >
+
+    <!-- Top Menu -->
+
+    <RelativeLayout
+        android:id="@+id/rlTopMenu"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/Black" >
+
+        <Button
+            android:id="@+id/btBack"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            android:id="@+id/tvDepartName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toLeftOf="@+id/btWeather"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/hello_world"
+            android:textColor="@color/White"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btWeather"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/btMsg"
+            android:background="@drawable/weather_sunny"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btMsg"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/btCart"
+            android:background="@drawable/btn_msg_off"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btCart"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/btMenu"
+            android:background="@drawable/btn_cart" />
+
+        <Button
+            android:id="@+id/btMenu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/btn_menu" />
+    </RelativeLayout>
+
+    <!-- Main Body -->
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_corner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/hsDepartList"
+        android:layout_below="@+id/rlTopMenu" >
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_youtube"
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:layout_below="@+id/rlTopMenu" >
+    </FrameLayout>
+
+    <!-- Bottom -->
+
+    <HorizontalScrollView
+        android:id="@+id/hsDepartList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Black"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/llDepartList"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:background="@color/Black"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>

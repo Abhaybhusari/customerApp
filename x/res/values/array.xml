@@ -1,0 +1,10 @@
+<!-- ?xml version="1.0" encoding="utf-8"? -->
+<resources>
+
+    <string-array name="selected">
+        <item>single</item>
+        <item>double</item>
+        <item>master</item>
+    </string-array>
+
+</resources>

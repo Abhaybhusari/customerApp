@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f" >
+
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/ivHotelLogo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/margin"
+            android:src="@drawable/bg_default_logo" />
+
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_toRightOf="@+id/ivHotelLogo"
+            android:text="Register"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/hsHotelList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Black"
+        android:scrollbars="none"
+        android:layout_below="@id/rlTop" >
+
+        <LinearLayout
+            android:id="@+id/llHotelList"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:background="@color/Black"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/appInfo"
+        android:layout_below="@+id/hsHotelList" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="E-MAIL"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etPwd"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="PASSWORD"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="Name"
+                android:inputType="text"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="MOBILE NUMBER"
+                android:inputType="phone"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="CITY/TOWN"
+                android:inputType="text"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etStreet"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="STREET"
+                android:inputType="text"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etPostCode"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="POST CODE"
+                android:inputType="number"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <Button
+                android:id="@+id/btRegister"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:text="Register" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/appInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/view_appinfo" />
+
+</RelativeLayout>

@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f" >
+
+    <ImageView
+        android:id="@+id/ivPrinter"
+        android:layout_width="104dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/menu_printer" />
+
+    <EditText
+        android:id="@+id/etPrinterIP"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ivPrinter"
+        android:layout_below="@+id/ivPrinter"
+        android:layout_marginTop="30dp"
+        android:hint="IP Address"
+        android:inputType="textUri"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin" />
+
+    <EditText
+        android:id="@+id/etPrinterPort"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPrinter"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/etPrinterIP"
+        android:hint="Port"
+        android:inputType="number"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin" />
+
+    <Button
+        android:id="@+id/btCheckPrinter"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etPrinterIP"
+        android:layout_below="@+id/etPrinterPort"
+        android:layout_marginTop="30dp"
+        android:text="Check Printer" />
+
+    <ImageView
+        android:id="@+id/ivCheckPrinter"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/btCheckPrinter"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_toLeftOf="@+id/btCheckPrinter"
+        android:background="@drawable/bg_checkmark" />
+
+    <Button
+        android:id="@+id/btUpdatePrinter"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etPrinterPort"
+        android:layout_below="@+id/etPrinterPort"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/btCheckPrinter"
+        android:text="Update Printer" />
+
+    <ImageView
+        android:id="@+id/ivUpdatePrinter"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/btUpdatePrinter"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_toLeftOf="@+id/btUpdatePrinter"
+        android:background="@drawable/bg_checkmark" />
+
+    <ProgressBar
+        android:id="@+id/pbPrinter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

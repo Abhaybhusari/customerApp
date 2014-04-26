@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:text="My Profile"
+                android:textSize="40sp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="E-MAIL"
+                android:editable="false"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etPwd"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="PASSWORD"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="Name"
+                android:inputType="text"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="MOBILE NUMBER"
+                android:inputType="phone"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="CITY/TOWN"
+                android:inputType="text"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etStreet"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="STREET"
+                android:inputType="text"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <EditText
+                android:id="@+id/etPostCode"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:hint="POST CODE"
+                android:inputType="number"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin" />
+
+            <Button
+                android:id="@+id/btRegister"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:text="Change" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f"
+    tools:context=".AllowedHotels" >
+
+    <!-- Top Menu -->
+
+    <RelativeLayout
+        android:id="@+id/rlTopMenu"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/Black" >
+
+        <Button
+            android:id="@+id/btBack"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            android:id="@+id/tvHotelHeaderName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/hello_world"
+            android:textColor="@color/White"
+            android:textSize="14sp" />
+        
+        <Button
+            android:id="@+id/btHotelChoose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/enterbutton"/>
+    </RelativeLayout>
+
+    <!-- Main Body -->
+
+	<HorizontalScrollView
+        android:id="@+id/hsHotelList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Black"
+        android:scrollbars="none" 
+        android:layout_below="@id/rlTopMenu">
+
+        <LinearLayout
+            android:id="@+id/llHotelList"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:background="@color/Black"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+	<!-- Bottom -->
+
+	<FrameLayout
+        android:id="@+id/fl_fragment_corner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/hsHotelList"
+        android:layout_alignParentBottom="true" >
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,199 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/ivHotelBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/hsDepartList"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_default_restaurant" />
+
+    <RelativeLayout
+        android:id="@+id/rlLogo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:background="@color/Black" />
+
+        <ImageView
+            android:id="@+id/ivHotelLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/margin"
+            android:contentDescription="@string/hello_world"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_toRightOf="@+id/ivHotelLogo"
+            android:text="Welcome to the"
+            android:textColor="@color/White"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvHotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWelcome"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/ivHotelLogo"
+            android:text="@string/hello_world"
+            android:textColor="@color/White"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btWeather"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/rlWeather"
+            android:background="@drawable/weather_sunny" />
+
+        <RelativeLayout
+            android:id="@+id/rlWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin" >
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:lines="1"
+                android:text="13:00"
+                android:textColor="@color/Goldenrod"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTime"
+                android:lines="1"
+                android:text="Partly Cloudy"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Top Menu -->
+
+    <RelativeLayout
+        android:id="@+id/rlTopMenu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/rlLogo"
+        android:background="#b0000000" >
+
+        <Button
+            android:id="@+id/btBack"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            android:id="@+id/tvDepartName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toLeftOf="@+id/btMsg"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/hello_world"
+            android:textColor="@color/White"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btMsg"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/btCart"
+            android:background="@drawable/btn_msg_off"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btCart"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/btMenu"
+            android:background="@drawable/btn_cart" />
+
+        <Button
+            android:id="@+id/btMenu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/btn_menu" />
+    </RelativeLayout>
+
+    <!-- Main Body -->
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_corner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/hsDepartList"
+        android:layout_below="@+id/rlTopMenu" >
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_youtube"
+        android:layout_width="600dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/hsDepartList"
+        android:layout_below="@+id/rlTopMenu"
+        android:layout_marginBottom="48dp" >
+    </FrameLayout>
+    <!-- Bottom -->
+
+    <HorizontalScrollView
+        android:id="@+id/hsDepartList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Black"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/llDepartList"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:background="@color/Black"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f" >
+
+    <ImageView
+        android:id="@+id/ivWeatherImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/weather_img_clear" />
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="25dp"
+        android:text="@string/hello_world"
+        android:textColor="@color/White"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCity"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="@string/hello_world"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCountry"
+        android:layout_marginLeft="@dimen/margin"
+        android:text="@string/hello_world"
+        android:textColor="@color/Goldenrod"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/ivWeatherIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@drawable/weather_icon_clear_day" />
+
+    <TextView
+        android:id="@+id/tvTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivWeatherIcon"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="@string/hello_world"
+        android:textColor="@color/White"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvWind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTemp"
+        android:layout_marginLeft="@dimen/margin"
+        android:text="@string/hello_world"
+        android:textColor="@color/White"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvLastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/margin"
+        android:text="@string/hello_world"
+        android:textColor="@color/White" />
+
+    <Button
+        android:id="@+id/btUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvLastUpdate"
+        android:layout_marginRight="@dimen/margin"
+        android:text="Update" />
+
+</RelativeLayout>
