@@ -1,0 +1,363 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f" >
+
+    <RelativeLayout
+        android:id="@+id/rlItemInfo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+        <ImageView
+            android:id="@+id/ivHotelBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/hello_world"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_default_room" />
+
+        <ImageView
+            android:id="@+id/ivShadowTop"
+            style="@style/shadow_top"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/hello_world" />
+
+        <ImageView
+            android:id="@+id/ivShadowBottom"
+            style="@style/shadow_bottom"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/hello_world" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/svCheckTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlItemInfo" >
+
+        <LinearLayout
+            android:id="@+id/llCheckTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/small_margin" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvRoomType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Room Type" />
+
+                <Spinner
+                    android:id="@+id/spRoomType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:spinnerMode="dropdown"
+                    android:text="@string/hello_world" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_separator" />
+
+            <TextView
+                android:id="@+id/tvDateLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="Booking Date" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvDateFrom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From" />
+
+                <Button
+                    android:id="@+id/btDateFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:text="@string/hello_world" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvDateTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To     " />
+
+                <Button
+                    android:id="@+id/btDateTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:text="@string/hello_world" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_separator" />
+
+            <Button
+                android:id="@+id/btCheckTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:text="Check Availability" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/svBookTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlItemInfo"
+        android:background="#2f363f"
+        android:visibility="invisible" >
+
+        <LinearLayout
+            android:id="@+id/llBookTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/small_margin" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btBack"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_back" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="13th Dec 2013"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvAvailTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="Select from the available rooms" />
+
+            <LinearLayout
+                android:id="@+id/llAvailTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:scrollbars="horizontal" >
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@drawable/bg_separator" />
+
+            <Button
+                android:id="@+id/btBookTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/margin"
+                android:text="Reserve Now" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/svCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlItemInfo"
+        android:background="#2f363f"
+        android:visibility="invisible" >
+
+        <LinearLayout
+            android:id="@+id/llCheckout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/small_margin" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btCheckoutBack"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_back" />
+
+                <TextView
+                    android:id="@+id/tvCheckout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="Checkout"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin" >
+
+                <TextView
+                    android:id="@+id/tvCard_Num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Card No: " />
+
+                <EditText
+                    android:id="@+id/etCard_Num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin"
+                    android:digits="0123456789"
+                    android:hint="Card Number"
+                    android:inputType="number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin" >
+
+                <TextView
+                    android:id="@+id/tvCard_ccv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="CCV: " />
+
+                <EditText
+                    android:id="@+id/etCard_ccv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:digits="0123456789"
+                    android:hint="CCV"
+                    android:inputType="number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin" >
+
+                <TextView
+                    android:id="@+id/tvCard_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Expire Month: " />
+
+                <Spinner
+                    android:id="@+id/spCard_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin" >
+
+                <TextView
+                    android:id="@+id/tvCard_EXyear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Expire Year: " />
+
+                <Spinner
+                    android:id="@+id/spCard_EXyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@drawable/bg_separator" />
+
+            <Button
+                android:id="@+id/btCheckout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/margin"
+                android:text="Checkout" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

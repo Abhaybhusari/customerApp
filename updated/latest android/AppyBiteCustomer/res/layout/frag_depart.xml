@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f" >
+
+    <RelativeLayout
+        android:id="@+id/rlDepartInfo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+        <ImageView
+            android:id="@+id/ivDepartBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_default_category"
+            android:contentDescription="@string/hello_world"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/ivShadowTop"
+            style="@style/shadow_top"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/hello_world" />
+
+        <ImageView
+            android:id="@+id/ivShadowBottom"
+            style="@style/shadow_bottom"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/hello_world" />
+
+        <TextView
+            android:id="@+id/tvDepartDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/margin"
+            android:background="#a0000000"
+            android:padding="@dimen/small_margin"
+            android:text="@string/hello_world"
+            android:textColor="@color/White" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvCategoryList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlDepartInfo" />
+
+    <ProgressBar
+        android:id="@+id/pbCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

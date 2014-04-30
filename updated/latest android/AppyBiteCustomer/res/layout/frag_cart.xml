@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rlCart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin"
+        android:layout_alignParentRight="true"
+        android:background="@color/Khaki"
+        android:gravity="right" >
+
+        <TextView
+            android:id="@+id/tvTotalPriceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:text="Total Price"
+            android:textColor="@color/Black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalPriceValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:text="USD 129.00"
+            android:textColor="@color/Black"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTotalPriceLabel"
+            android:layout_margin="@dimen/small_margin"
+            android:background="@drawable/bg_separator" />
+
+        <include
+            android:id="@+id/caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv1"
+            layout="@layout/item_cart"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/lvCartList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btAddMore"
+            android:layout_below="@+id/caption" />
+
+        <Button
+            android:id="@+id/btAddMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Add More"
+            android:textColor="@color/Black" />
+
+        <Button
+            android:id="@+id/btSendOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Send Order"
+            android:textColor="@color/Black" />
+
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="201dp"
+            android:layout_height="245dp"
+            android:layout_alignBottom="@+id/lvCartList"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_receipt" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/rlDepartInfo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/ivDepartBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/hello_world"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_default_category" />
+
+        <ImageView
+            android:id="@+id/ivShadowTop"
+            style="@style/shadow_top"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/hello_world" />
+
+        <ImageView
+            android:id="@+id/ivShadowBottom"
+            style="@style/shadow_bottom"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/hello_world" />
+
+        <TextView
+            android:id="@+id/tvDepartDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/margin"
+            android:background="#a0000000"
+            android:padding="@dimen/small_margin"
+            android:text="@string/hello_world"
+            android:textColor="@color/White" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/hsDepartList"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/Black"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/lvCategoryList"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:background="@color/Black"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+   
+
+    <ProgressBar
+        android:id="@+id/pbCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

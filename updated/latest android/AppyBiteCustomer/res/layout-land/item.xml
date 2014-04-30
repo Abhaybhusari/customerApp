@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linear_gradient" >
+
+    <RelativeLayout
+        android:id="@+id/rlParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/small_margin"
+            android:text="@string/hello_world"
+            android:textColor="@color/Goldenrod"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rlParent_Img"
+            android:layout_width="90dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/tvTitle" >
+
+            <ImageView
+                android:id="@+id/ivThumb"
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/hello_world"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/ivShadowTop"
+                style="@style/shadow_top"
+                android:layout_width="90dp"
+                android:contentDescription="@string/hello_world" />
+
+            <ImageView
+                android:id="@+id/ivShadowBottom"
+                style="@style/shadow_bottom"
+                android:layout_width="90dp"
+                android:layout_alignParentBottom="true"
+                android:contentDescription="@string/hello_world" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

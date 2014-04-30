@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ivHotelBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/hello_world"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_hotel_bg" />
+
+    <RelativeLayout
+        android:id="@+id/rlLogo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:alpha="0.5"
+        android:background="@color/Black" >
+
+        <ImageView
+            android:id="@+id/ivHotelLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/margin"
+            android:contentDescription="@string/hello_world"
+            android:scaleType="centerInside" 
+            android:src="@drawable/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_toRightOf="@+id/ivHotelLogo"
+            android:text="Welcome to the"
+            android:textColor="@color/White"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvHotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWelcome"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/ivHotelLogo"
+            android:text="@string/AppyBit_World"
+            android:textColor="@color/White"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f363f"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rlItemInfo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+        <ImageView
+            android:id="@+id/ivHotelBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/hello_world"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_default_room" />
+
+        <ImageView
+            android:id="@+id/ivShadowTop"
+            style="@style/shadow_top"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/hello_world" />
+
+        <ImageView
+            android:id="@+id/ivShadowBottom"
+            style="@style/shadow_bottom"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/hello_world" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/svCheckTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlItemInfo" >
+
+        <LinearLayout
+            android:id="@+id/llCheckTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/small_margin" >
+
+            <TextView
+                android:id="@+id/tvExtendDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:text="How long would you like to stay more?" />
+
+            <Button
+                android:id="@+id/btExtendDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:text="@string/hello_world" />
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_separator" />
+
+            <Button
+                android:id="@+id/btExtendStay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:text="Extend Stay" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</LinearLayout>
