@@ -1,5 +1,10 @@
 package com.appybite.customer;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,8 +13,11 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -29,6 +37,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.yj.commonlib.dialog.DialogUtils;
+import com.yj.commonlib.image.Utils;
 import com.yj.commonlib.pref.PrefValue;
 import com.yj.commonlib.screen.LayoutLib;
 import com.yj.commonlib.screen.PRJFUNC;
@@ -59,7 +68,7 @@ public class LoginActivity extends Activity {
 
 		// - update position
 		if (!PRJFUNC.DEFAULT_SCREEN) {
-		//	scaleView();
+			scaleView();
 		}
 		
 		initImageLoader(getApplicationContext());
@@ -173,14 +182,14 @@ public class LoginActivity extends Activity {
 			
 			//. https://www.appyorder.com/pro_version/webservice_smart_app/new/loginBrand.php?email_id=b@b.com&password=Yg==
 			//. https://www.appyorder.com/pro_version/webservice_smart_app/new/loginBrand.php?email_id=test@test.com&password=123
+			
+			//http://www.appyorder.com/pro_version/webservice_smart_app/new/loginBrand.php?email_id=abc@gmail.com&password=YWNjZXNz
 			RequestParams params = new RequestParams();
 			params.add("email_id", edt_email.getText().toString());
 			params.add("password", Base64.encodeToString(edt_password.getText().toString().getBytes(), Base64.NO_WRAP)/*Base64.encodeToString(edt_password.getText().toString().getBytes(), Base64.NO_WRAP)*/);
 			
 			DialogUtils.launchProgress(LoginActivity.this, "Please wait while logging in...");
 			CustomerHttpClient.get("new/loginBrand.php", params, new AsyncHttpResponseHandler() {
-			
-			//CustomerHttpClient.get("http://www.appyorder.com/pro_version/webservice_smart_app/new/loginBrand.php?email_id=abc@gmail.com&password=YWNjZXNz", params, new AsyncHttpResponseHandler() {
 				@Override
 				public void onFinish() {
 					
@@ -243,36 +252,29 @@ public class LoginActivity extends Activity {
 	            		Log.i("HTTP Response <<<", result);
 	            		JSONObject jsonObject = (JSONObject) new JSONObject(result);
 						String status = jsonObject.getString("status");
+					
 						if(status.equalsIgnoreCase("true"))
 						{
 							JSONObject jsonData = null;
 							if(jsonObject.has("data"))
-							jsonData = jsonObject.getJSONObject("data");
-						//		jsonData = jsonObject.getJSONObject("customer_Details");
+								jsonData = jsonObject.getJSONObject("data");
 							
 							if(jsonData != null && jsonData.getString("stat").equalsIgnoreCase("demo")) {
-							
+								
 								PrefValue.setBoolean(LoginActivity.this, R.string.pref_app_demo, true);
 								
 								String customer_id = jsonData.getString("id");
 								String customer_name = jsonData.getString("name");
 								String customer_email_id = jsonData.getString("email");
 								String hotel_id = jsonData.getString("hotel");
-							
-								//String to store url of image
-			//					String imgur = jsonData.getString("rest_images"); 
-								
-					//			Log.d("hotal Image", imgur);
-								
-								
 								
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_id, customer_id);
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_name, customer_name);
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_email_id, customer_email_id);
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_pwd, edt_password.getText().toString());
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_id, hotel_id);
-							
-						} else {
+								
+							} else {
 								
 								PrefValue.setBoolean(LoginActivity.this, R.string.pref_app_demo, false);
 								
@@ -292,6 +294,19 @@ public class LoginActivity extends Activity {
 								String lat = jsonObject.getString("lat");
 								String lon = jsonObject.getString("long");
 
+								JSONObject hotelLogoDetails = jsonObject.getJSONObject("images");
+								String hotelLogo = hotelLogoDetails.getString("hotel_logo");
+//								Bitmap bitmap = getBitmapFromURL(hotelLogo);
+								
+								JSONObject hotelImageDetails = jsonObject.getJSONObject("rest_images");
+								String hotelImages = hotelImageDetails.getString("restaurant_image");
+								
+								String appWelcomeDetails = jsonObject.getString("app_welcome");
+//								bundle.putString("appWelcomeDetails", appWelcomeDetails);
+//								bundle.putString("hotelLogo", hotelLogo);
+//								bundle.putString("hotelImages", hotelImages);
+								
+
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_id, customer_id);
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_name, customer_name);
 								PrefValue.setString(LoginActivity.this, R.string.pref_customer_address, customer_address);
@@ -306,6 +321,11 @@ public class LoginActivity extends Activity {
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_name, hotel_name);
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_lat, lat);
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_lon, lon);
+								
+								// new one
+								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_welcome_name, appWelcomeDetails);
+								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_bg, hotelImages);
+								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_logo, hotelLogo);
 
 								JSONObject allowedHotelObject = jsonObject.getJSONObject("allowed hotel list");
 								String allowedStatus = allowedHotelObject.getString("status");
@@ -316,8 +336,12 @@ public class LoginActivity extends Activity {
 							}
 								
 							Intent i = null;
+							
+							
 							if(DeviceUtil.isTabletByRes(LoginActivity.this)) {
 								i = new Intent(LoginActivity.this, MainActivity_Tab.class);
+								
+								
 							} else {
 								i = new Intent(LoginActivity.this, MainActivity.class);
 								
@@ -398,5 +422,23 @@ public class LoginActivity extends Activity {
 		intent.putExtra("sender", C2DMRegistrationReceiver.senderID/* "appzeal.c2dm@gmail.com" *//* "k2anup@gmail.com" */);
 		startService(intent);
 	}
+	
+	
+	
+
+	public Bitmap getBitmapFromURL(String src) {
+		try {
+			URL url = new URL(src);
+			URLConnection connection = (URLConnection) url.openConnection();
+			connection.setDoInput(true);
+			connection.connect();
+			InputStream input = connection.getInputStream();
+			Bitmap myBitmap = BitmapFactory.decodeStream(input);
+			input.close();
+			return myBitmap;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
- 

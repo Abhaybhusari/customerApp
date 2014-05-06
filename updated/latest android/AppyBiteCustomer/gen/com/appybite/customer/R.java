@@ -408,98 +408,93 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int small_margin=0x7f090003;
     }
     public static final class drawable {
-        public static final int appypos=0x7f020000;
-        public static final int bg_checkmark=0x7f020001;
-        public static final int bg_default_category=0x7f020002;
-        public static final int bg_default_depart=0x7f020003;
-        public static final int bg_default_food=0x7f020004;
-        public static final int bg_default_loading=0x7f020005;
-        public static final int bg_default_logo=0x7f020006;
-        public static final int bg_default_logo_=0x7f020007;
-        public static final int bg_default_restaurant=0x7f020008;
-        public static final int bg_default_room=0x7f020009;
-        public static final int bg_msg=0x7f02000a;
-        public static final int bg_newmsg=0x7f02000b;
-        public static final int bg_receipt=0x7f02000c;
-        public static final int bg_restaurant=0x7f02000d;
-        public static final int bg_separator=0x7f02000e;
-        public static final int border=0x7f02000f;
-        public static final int bt_geolocater=0x7f020010;
-        public static final int btn_back=0x7f020011;
-        public static final int btn_cart=0x7f020012;
-        public static final int btn_delete=0x7f020013;
-        public static final int btn_menu=0x7f020014;
-        public static final int btn_msg_off=0x7f020015;
-        public static final int btn_msg_on=0x7f020016;
-        public static final int btn_pause=0x7f020017;
-        public static final int btn_play=0x7f020018;
-        public static final int circle=0x7f020019;
-        public static final int circle_progressbg=0x7f02001a;
-        public static final int circle_red=0x7f02001b;
-        public static final int edittext=0x7f02001c;
-        public static final int enterbutton=0x7f02001d;
-        public static final int home_hotel_bg=0x7f02001e;
-        public static final int home_hotel_bg_=0x7f02001f;
-        public static final int housekeeping=0x7f020020;
-        public static final int ic_launcher=0x7f020021;
-        public static final int item_background_holo_dark=0x7f020022;
-        public static final int item_background_holo_light=0x7f020023;
-        public static final int linear_gradient=0x7f020024;
-        public static final int list_focused_holo=0x7f020025;
-        public static final int list_longpressed_holo=0x7f020026;
-        public static final int list_pressed_holo_dark=0x7f020027;
-        public static final int list_pressed_holo_light=0x7f020028;
-        public static final int list_selector_background_transition_holo_dark=0x7f020029;
-        public static final int list_selector_background_transition_holo_light=0x7f02002a;
-        public static final int list_selector_disabled_holo_dark=0x7f02002b;
-        public static final int list_selector_disabled_holo_light=0x7f02002c;
-        public static final int logo=0x7f02002d;
-        public static final int massage=0x7f02002e;
-        public static final int menu_aboutus=0x7f02002f;
-        public static final int menu_booktable=0x7f020030;
-        public static final int menu_extendstay=0x7f020031;
-        public static final int menu_favourites=0x7f020032;
-        public static final int menu_favourites_on=0x7f020033;
-        public static final int menu_printer=0x7f020034;
-        public static final int menu_profile=0x7f020035;
-        public static final int menu_roombill=0x7f020036;
-        public static final int menu_wakeup=0x7f020037;
-        public static final int news=0x7f020038;
-        public static final int np_numberpicker_selection_divider=0x7f020039;
-        public static final int qrcode_table=0x7f02003a;
-        public static final int radial_gradient=0x7f02003b;
-        public static final int screen_capture=0x7f02003c;
-        public static final int shadow=0x7f02003d;
-        public static final int shadow_bottom=0x7f02003e;
-        public static final int shadow_left=0x7f02003f;
-        public static final int shadow_right=0x7f020040;
-        public static final int shadow_top=0x7f020041;
-        public static final int shadowright=0x7f020042;
-        public static final int splash=0x7f020043;
-        public static final int tour=0x7f020044;
-        public static final int weather_cloudy=0x7f020045;
-        public static final int weather_icon_broken_clouds_day=0x7f020046;
-        public static final int weather_icon_clear_day=0x7f020047;
-        public static final int weather_icon_mist_day=0x7f020048;
-        public static final int weather_icon_rain_day=0x7f020049;
-        public static final int weather_icon_scattered_clouds_day=0x7f02004a;
-        public static final int weather_icon_snow_day=0x7f02004b;
-        public static final int weather_icon_thunderstorm_day=0x7f02004c;
-        public static final int weather_img_broken_clouds=0x7f02004d;
-        public static final int weather_img_clear=0x7f02004e;
-        public static final int weather_img_mist=0x7f02004f;
-        public static final int weather_img_rain=0x7f020050;
-        public static final int weather_img_scattered_clouds=0x7f020051;
-        public static final int weather_img_snow=0x7f020052;
-        public static final int weather_img_thunderstorm=0x7f020053;
-        public static final int weather_light_rainy=0x7f020054;
-        public static final int weather_partly_cloudy=0x7f020055;
-        public static final int weather_rainy=0x7f020056;
-        public static final int weather_snow=0x7f020057;
-        public static final int weather_sunny=0x7f020058;
+        public static final int bg_checkmark=0x7f020000;
+        public static final int bg_default_category=0x7f020001;
+        public static final int bg_default_depart=0x7f020002;
+        public static final int bg_default_food=0x7f020003;
+        public static final int bg_default_loading=0x7f020004;
+        public static final int bg_default_logo=0x7f020005;
+        public static final int bg_default_logo_=0x7f020006;
+        public static final int bg_default_restaurant=0x7f020007;
+        public static final int bg_default_room=0x7f020008;
+        public static final int bg_msg=0x7f020009;
+        public static final int bg_newmsg=0x7f02000a;
+        public static final int bg_receipt=0x7f02000b;
+        public static final int bg_restaurant=0x7f02000c;
+        public static final int bg_separator=0x7f02000d;
+        public static final int border=0x7f02000e;
+        public static final int btn_back=0x7f02000f;
+        public static final int btn_cart=0x7f020010;
+        public static final int btn_delete=0x7f020011;
+        public static final int btn_menu=0x7f020012;
+        public static final int btn_msg_off=0x7f020013;
+        public static final int btn_msg_on=0x7f020014;
+        public static final int btn_pause=0x7f020015;
+        public static final int btn_play=0x7f020016;
+        public static final int circle=0x7f020017;
+        public static final int circle_progressbg=0x7f020018;
+        public static final int circle_red=0x7f020019;
+        public static final int edittext=0x7f02001a;
+        public static final int enterbutton=0x7f02001b;
+        public static final int home_hotel_bg=0x7f02001c;
+        public static final int home_hotel_bg_=0x7f02001d;
+        public static final int housekeeping=0x7f02001e;
+        public static final int ic_launcher=0x7f02001f;
+        public static final int item_background_holo_dark=0x7f020020;
+        public static final int item_background_holo_light=0x7f020021;
+        public static final int linear_gradient=0x7f020022;
+        public static final int list_focused_holo=0x7f020023;
+        public static final int list_longpressed_holo=0x7f020024;
+        public static final int list_pressed_holo_dark=0x7f020025;
+        public static final int list_pressed_holo_light=0x7f020026;
+        public static final int list_selector_background_transition_holo_dark=0x7f020027;
+        public static final int list_selector_background_transition_holo_light=0x7f020028;
+        public static final int list_selector_disabled_holo_dark=0x7f020029;
+        public static final int list_selector_disabled_holo_light=0x7f02002a;
+        public static final int massage=0x7f02002b;
+        public static final int menu_aboutus=0x7f02002c;
+        public static final int menu_booktable=0x7f02002d;
+        public static final int menu_extendstay=0x7f02002e;
+        public static final int menu_favourites=0x7f02002f;
+        public static final int menu_favourites_on=0x7f020030;
+        public static final int menu_printer=0x7f020031;
+        public static final int menu_profile=0x7f020032;
+        public static final int menu_roombill=0x7f020033;
+        public static final int menu_wakeup=0x7f020034;
+        public static final int news=0x7f020035;
+        public static final int np_numberpicker_selection_divider=0x7f020036;
+        public static final int qrcode_table=0x7f020037;
+        public static final int radial_gradient=0x7f020038;
+        public static final int shadow=0x7f020039;
+        public static final int shadow_bottom=0x7f02003a;
+        public static final int shadow_left=0x7f02003b;
+        public static final int shadow_right=0x7f02003c;
+        public static final int shadow_top=0x7f02003d;
+        public static final int shadowright=0x7f02003e;
+        public static final int splash=0x7f02003f;
+        public static final int tour=0x7f020040;
+        public static final int weather_cloudy=0x7f020041;
+        public static final int weather_icon_broken_clouds_day=0x7f020042;
+        public static final int weather_icon_clear_day=0x7f020043;
+        public static final int weather_icon_mist_day=0x7f020044;
+        public static final int weather_icon_rain_day=0x7f020045;
+        public static final int weather_icon_scattered_clouds_day=0x7f020046;
+        public static final int weather_icon_snow_day=0x7f020047;
+        public static final int weather_icon_thunderstorm_day=0x7f020048;
+        public static final int weather_img_broken_clouds=0x7f020049;
+        public static final int weather_img_clear=0x7f02004a;
+        public static final int weather_img_mist=0x7f02004b;
+        public static final int weather_img_rain=0x7f02004c;
+        public static final int weather_img_scattered_clouds=0x7f02004d;
+        public static final int weather_img_snow=0x7f02004e;
+        public static final int weather_img_thunderstorm=0x7f02004f;
+        public static final int weather_light_rainy=0x7f020050;
+        public static final int weather_partly_cloudy=0x7f020051;
+        public static final int weather_rainy=0x7f020052;
+        public static final int weather_snow=0x7f020053;
+        public static final int weather_sunny=0x7f020054;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f0600d8;
         public static final int action_settings=0x7f0600d1;
         public static final int appInfo=0x7f060021;
         public static final int btAddMore=0x7f06007c;
@@ -520,14 +515,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btDelete=0x7f0600cb;
         public static final int btExtendDays=0x7f060085;
         public static final int btExtendStay=0x7f060086;
-        public static final int btGeocoder=0x7f0600de;
-        public static final int btGeolocater=0x7f0600e0;
-        public static final int btGeoloder=0x7f0600df;
         public static final int btHotelChoose=0x7f0600d3;
         public static final int btLogin=0x7f06000b;
         public static final int btLogout=0x7f06009a;
         public static final int btMenu=0x7f060013;
-        public static final int btMore=0x7f0600e5;
+        public static final int btMore=0x7f0600db;
         public static final int btMsg=0x7f060011;
         public static final int btOk=0x7f06003e;
         public static final int btOldCode=0x7f06002c;
@@ -556,20 +548,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int etPrinterIP=0x7f0600b3;
         public static final int etPrinterPort=0x7f0600b4;
         public static final int etPwd=0x7f06000a;
-        public static final int etRoomNo=0x7f0600e4;
+        public static final int etRoomNo=0x7f0600da;
         public static final int etStreet=0x7f060026;
         public static final int etUserName=0x7f060009;
         public static final int fl_fragment_corner=0x7f060014;
         public static final int fl_fragment_youtube=0x7f060016;
         public static final int fullscreen=0x7f060003;
+        public static final int hlvCategoryList=0x7f0600d6;
+        public static final int hlvCustomList=0x7f0600df;
         public static final int hsDepartList=0x7f060015;
         public static final int hsHotelList=0x7f0600d4;
-        public static final int imageView1=0x7f0600eb;
-        public static final int include=0x7f0600da;
         public static final int iv1=0x7f06002d;
         public static final int iv2=0x7f060031;
         public static final int ivAboutus=0x7f0600b0;
-        public static final int ivAdditionAccount=0x7f0600e8;
+        public static final int ivAdditionAccount=0x7f0600dd;
         public static final int ivAlarm=0x7f0600ad;
         public static final int ivBookTable=0x7f0600a1;
         public static final int ivCheckPrinter=0x7f0600b6;
@@ -593,7 +585,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ivWeatherIcon=0x7f0600bf;
         public static final int ivWeatherImage=0x7f0600bc;
         public static final int left=0x7f060000;
-        public static final int linearLayout1=0x7f0600db;
         public static final int llAvailTable=0x7f060076;
         public static final int llAvailTime=0x7f06005d;
         public static final int llBookTable=0x7f06005a;
@@ -627,31 +618,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int right=0x7f060001;
         public static final int rlAboutus=0x7f0600af;
         public static final int rlAddOrderDlg=0x7f060028;
-        public static final int rlAdditionAccount=0x7f0600e7;
+        public static final int rlAdditionAccount=0x7f0600dc;
         public static final int rlAlarm=0x7f0600ac;
         public static final int rlBookTable=0x7f0600a0;
         public static final int rlCart=0x7f060077;
-        public static final int rlData=0x7f0600e6;
         public static final int rlDelete=0x7f0600c6;
         public static final int rlDepartInfo=0x7f06007e;
         public static final int rlExtendStay=0x7f0600a6;
         public static final int rlFavourites=0x7f06009e;
-        public static final int rlHotelInfo=0x7f0600e1;
+        public static final int rlHotelInfo=0x7f0600d7;
         public static final int rlItemInfo=0x7f060042;
         public static final int rlLogo=0x7f060019;
         public static final int rlNewMsg=0x7f060034;
         public static final int rlNewMsgDlg=0x7f060033;
         public static final int rlParent=0x7f0600c4;
-        public static final int rlParent_Img=0x7f0600ea;
         public static final int rlPrinter=0x7f06009b;
         public static final int rlProfile=0x7f060096;
         public static final int rlReserveRoom=0x7f0600a3;
         public static final int rlRoomBill=0x7f0600a9;
         public static final int rlSubInfo=0x7f060045;
+        public static final int rlTextParent=0x7f0600e0;
         public static final int rlTop=0x7f06001f;
         public static final int rlTopMenu=0x7f06000d;
         public static final int rlWeather=0x7f06001c;
-        public static final int scrollView1=0x7f0600d9;
         public static final int selected_view=0x7f060005;
         public static final int slidingmenumain=0x7f0600ce;
         public static final int spCard_EXyear=0x7f060070;
@@ -661,10 +650,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int svBookTable=0x7f060059;
         public static final int svCheckTable=0x7f060054;
         public static final int svCheckout=0x7f060065;
-        public static final int textView1=0x7f0600dc;
-        public static final int textView2=0x7f0600dd;
         public static final int tvAboutUs=0x7f0600b1;
-        public static final int tvAdditionAccount=0x7f0600e9;
+        public static final int tvAdditionAccount=0x7f0600de;
         public static final int tvAddressLabel=0x7f060049;
         public static final int tvAddressValue=0x7f06004a;
         public static final int tvAlarm=0x7f0600ae;
@@ -697,7 +684,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tvExtendStay=0x7f0600a8;
         public static final int tvExtras=0x7f060094;
         public static final int tvFavourites=0x7f06009f;
-        public static final int tvHotelDesc=0x7f0600e2;
+        public static final int tvHotelDesc=0x7f0600d8;
         public static final int tvHotelHeaderName=0x7f0600d2;
         public static final int tvHotelName=0x7f06001b;
         public static final int tvLastUpdate=0x7f0600c2;
@@ -718,7 +705,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tvRegister=0x7f060020;
         public static final int tvReserveRoom=0x7f0600a5;
         public static final int tvRoomBill=0x7f0600ab;
-        public static final int tvRoomNo=0x7f0600e3;
+        public static final int tvRoomNo=0x7f0600d9;
         public static final int tvRoomType=0x7f060060;
         public static final int tvTemp=0x7f0600c0;
         public static final int tvTime=0x7f06001d;
@@ -732,8 +719,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tvWelcome=0x7f06001a;
         public static final int tvWind=0x7f0600c1;
         public static final int tv_register=0x7f0600bb;
-        public static final int txtMsg=0x7f0600d7;
-        public static final int txtWelcome=0x7f0600d6;
         public static final int viRoomBill=0x7f0600ba;
     }
     public static final class layout {
@@ -778,25 +763,28 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int frag_subcategory=0x7f030026;
         public static final int frag_updateprofile=0x7f030027;
         public static final int frag_weather=0x7f030028;
-        public static final int item=0x7f030029;
-        public static final int item_cart=0x7f03002a;
-        public static final int item_category=0x7f03002b;
-        public static final int item_depart=0x7f03002c;
-        public static final int item_depart_tab=0x7f03002d;
-        public static final int item_extralist=0x7f03002e;
-        public static final int item_fav=0x7f03002f;
-        public static final int item_hotel=0x7f030030;
-        public static final int item_hotel_tab=0x7f030031;
-        public static final int item_item=0x7f030032;
-        public static final int item_item_tab=0x7f030033;
-        public static final int item_message=0x7f030034;
-        public static final int item_modifierlist=0x7f030035;
-        public static final int menu_frame=0x7f030036;
-        public static final int number_picker_with_selector_wheel=0x7f030037;
-        public static final int slidingmenumain=0x7f030038;
-        public static final int view_appinfo=0x7f030039;
-        public static final int view_roombill=0x7f03003a;
-        public static final int view_roombill_checkout=0x7f03003b;
+        public static final int item_cart=0x7f030029;
+        public static final int item_category=0x7f03002a;
+        public static final int item_depart=0x7f03002b;
+        public static final int item_depart_tab=0x7f03002c;
+        public static final int item_extralist=0x7f03002d;
+        public static final int item_fav=0x7f03002e;
+        public static final int item_hotel=0x7f03002f;
+        public static final int item_hotel_tab=0x7f030030;
+        public static final int item_item=0x7f030031;
+        public static final int item_item_tab=0x7f030032;
+        public static final int item_message=0x7f030033;
+        public static final int item_modifierlist=0x7f030034;
+        public static final int land_frag_itemdetails=0x7f030035;
+        public static final int land_item_category=0x7f030036;
+        public static final int land_item_item=0x7f030037;
+        public static final int land_itemdetails_tab=0x7f030038;
+        public static final int menu_frame=0x7f030039;
+        public static final int number_picker_with_selector_wheel=0x7f03003a;
+        public static final int slidingmenumain=0x7f03003b;
+        public static final int view_appinfo=0x7f03003c;
+        public static final int view_roombill=0x7f03003d;
+        public static final int view_roombill_checkout=0x7f03003e;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -805,7 +793,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int scan=0x7f050000;
     }
     public static final class string {
-        public static final int AppyBit_World=0x7f0a0019;
+        public static final int AppyBit_World=0x7f0a001c;
         public static final int action_settings=0x7f0a0001;
         public static final int app_name=0x7f0a0000;
         public static final int hello_world=0x7f0a0002;
@@ -821,21 +809,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pref_customer_name=0x7f0a0005;
         public static final int pref_customer_p_code=0x7f0a000b;
         public static final int pref_customer_phone=0x7f0a000a;
-        public static final int pref_customer_pwd=0x7f0a001b;
+        public static final int pref_customer_pwd=0x7f0a001e;
         public static final int pref_customer_room_no=0x7f0a000d;
         public static final int pref_customer_state=0x7f0a0007;
-        public static final int pref_hotel_allowed=0x7f0a001c;
+        public static final int pref_hotel_allowed=0x7f0a001f;
+        public static final int pref_hotel_background_image=0x7f0a0016;
         public static final int pref_hotel_bg=0x7f0a0011;
-        public static final int pref_hotel_first=0x7f0a001a;
+        public static final int pref_hotel_first=0x7f0a001d;
         public static final int pref_hotel_id=0x7f0a000e;
         public static final int pref_hotel_lat=0x7f0a0013;
         public static final int pref_hotel_logo=0x7f0a0010;
         public static final int pref_hotel_lon=0x7f0a0014;
         public static final int pref_hotel_name=0x7f0a000f;
-        public static final int pref_order_code=0x7f0a0017;
-        public static final int pref_order_qrcode=0x7f0a0016;
-        public static final int pref_order_type=0x7f0a0015;
-        public static final int pref_room_no=0x7f0a0018;
+        public static final int pref_hotel_new_logo=0x7f0a0017;
+        public static final int pref_hotel_welcome_name=0x7f0a0015;
+        public static final int pref_order_code=0x7f0a001a;
+        public static final int pref_order_qrcode=0x7f0a0019;
+        public static final int pref_order_type=0x7f0a0018;
+        public static final int pref_room_no=0x7f0a001b;
     }
     public static final class style {
         /** 
@@ -940,7 +931,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:internalLayout
+          @attr name com.appybite.customer:internalLayout
         */
         public static final int NumberPicker_internalLayout = 8;
         /**
@@ -958,7 +949,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:internalMaxHeight
+          @attr name com.appybite.customer:internalMaxHeight
         */
         public static final int NumberPicker_internalMaxHeight = 5;
         /**
@@ -976,7 +967,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:internalMaxWidth
+          @attr name com.appybite.customer:internalMaxWidth
         */
         public static final int NumberPicker_internalMaxWidth = 7;
         /**
@@ -994,7 +985,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:internalMinHeight
+          @attr name com.appybite.customer:internalMinHeight
         */
         public static final int NumberPicker_internalMinHeight = 4;
         /**
@@ -1012,7 +1003,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:internalMinWidth
+          @attr name com.appybite.customer:internalMinWidth
         */
         public static final int NumberPicker_internalMinWidth = 6;
         /**
@@ -1024,7 +1015,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:selectionDivider
+          @attr name com.appybite.customer:selectionDivider
         */
         public static final int NumberPicker_selectionDivider = 1;
         /**
@@ -1042,7 +1033,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:selectionDividerHeight
+          @attr name com.appybite.customer:selectionDividerHeight
         */
         public static final int NumberPicker_selectionDividerHeight = 2;
         /**
@@ -1060,7 +1051,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:selectionDividersDistance
+          @attr name com.appybite.customer:selectionDividersDistance
         */
         public static final int NumberPicker_selectionDividersDistance = 3;
         /**
@@ -1072,7 +1063,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:solidColor
+          @attr name com.appybite.customer:solidColor
         */
         public static final int NumberPicker_solidColor = 0;
         /**
@@ -1084,7 +1075,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:virtualButtonPressedDrawable
+          @attr name com.appybite.customer:virtualButtonPressedDrawable
         */
         public static final int NumberPicker_virtualButtonPressedDrawable = 9;
         /** Attributes that can be used with a SlidingMenu.
@@ -1142,7 +1133,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:behindOffset
+          @attr name com.appybite.customer:behindOffset
         */
         public static final int SlidingMenu_behindOffset = 3;
         /**
@@ -1156,7 +1147,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:behindScrollScale
+          @attr name com.appybite.customer:behindScrollScale
         */
         public static final int SlidingMenu_behindScrollScale = 5;
         /**
@@ -1172,7 +1163,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:behindWidth
+          @attr name com.appybite.customer:behindWidth
         */
         public static final int SlidingMenu_behindWidth = 4;
         /**
@@ -1186,7 +1177,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:fadeDegree
+          @attr name com.appybite.customer:fadeDegree
         */
         public static final int SlidingMenu_fadeDegree = 11;
         /**
@@ -1200,7 +1191,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:fadeEnabled
+          @attr name com.appybite.customer:fadeEnabled
         */
         public static final int SlidingMenu_fadeEnabled = 10;
         /**
@@ -1217,7 +1208,7 @@ containing a value of this type.
 <tr><td><code>left</code></td><td>0</td><td></td></tr>
 <tr><td><code>right</code></td><td>1</td><td></td></tr>
 </table>
-          @attr name android:mode
+          @attr name com.appybite.customer:mode
         */
         public static final int SlidingMenu_mode = 0;
         /**
@@ -1227,7 +1218,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:selectorDrawable
+          @attr name com.appybite.customer:selectorDrawable
         */
         public static final int SlidingMenu_selectorDrawable = 13;
         /**
@@ -1241,7 +1232,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:selectorEnabled
+          @attr name com.appybite.customer:selectorEnabled
         */
         public static final int SlidingMenu_selectorEnabled = 12;
         /**
@@ -1251,7 +1242,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:shadowDrawable
+          @attr name com.appybite.customer:shadowDrawable
         */
         public static final int SlidingMenu_shadowDrawable = 8;
         /**
@@ -1267,7 +1258,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:shadowWidth
+          @attr name com.appybite.customer:shadowWidth
         */
         public static final int SlidingMenu_shadowWidth = 9;
         /**
@@ -1285,7 +1276,7 @@ containing a value of this type.
 <tr><td><code>fullscreen</code></td><td>1</td><td></td></tr>
 <tr><td><code>none</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:touchModeAbove
+          @attr name com.appybite.customer:touchModeAbove
         */
         public static final int SlidingMenu_touchModeAbove = 6;
         /**
@@ -1303,7 +1294,7 @@ containing a value of this type.
 <tr><td><code>fullscreen</code></td><td>1</td><td></td></tr>
 <tr><td><code>none</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:touchModeBehind
+          @attr name com.appybite.customer:touchModeBehind
         */
         public static final int SlidingMenu_touchModeBehind = 7;
         /**
@@ -1313,7 +1304,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:viewAbove
+          @attr name com.appybite.customer:viewAbove
         */
         public static final int SlidingMenu_viewAbove = 1;
         /**
@@ -1323,7 +1314,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:viewBehind
+          @attr name com.appybite.customer:viewBehind
         */
         public static final int SlidingMenu_viewBehind = 2;
     };

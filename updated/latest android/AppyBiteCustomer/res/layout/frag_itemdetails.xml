@@ -94,8 +94,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/small_margin" 
-                    android:visibility="invisible"/>
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:visibility="invisible" />
             </RelativeLayout>
 
             <TextView
@@ -136,7 +136,7 @@
                     android:spinnerMode="dialog"
                     android:text="1" />
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,8 +157,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Input room no"
-	                android:inputType="text"
-	                android:singleLine="true" />
+                    android:inputType="text"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -180,16 +180,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Book Item" 
-                    android:visibility="gone"/>
-                
+                    android:text="Book Item"
+                    android:visibility="gone" />
+
                 <Button
                     android:id="@+id/btMore"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="More" 
-                    android:visibility="visible"/>
+                    android:text="More"
+                    android:visibility="visible" />
             </LinearLayout>
 
             <TextView

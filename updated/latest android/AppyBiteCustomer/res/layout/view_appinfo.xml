@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp" >
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:id="@+id/iv1"
@@ -14,32 +14,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv1"
-        android:layout_alignParentTop="true"
         android:paddingLeft="@dimen/small_margin"
         android:paddingBottom="@dimen/margin"
         android:paddingTop="@dimen/margin"
-        android:text="sponsered By" />
-  <!--   <TextView
+        android:text="v1.0" />
+
+    <TextView
         android:id="@+id/tvWebsite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/iv1"
-         android:layout_alignParentTop="true"
         android:paddingRight="@dimen/small_margin"
         android:paddingBottom="@dimen/margin"
         android:paddingTop="@dimen/margin"
         android:autoLink="web"
-        android:text="www.appypos.com" /> -->
-
-      <ImageView
-          android:id="@+id/imageView1"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignBottom="@+id/tvAppVer"
-          android:layout_alignParentRight="true"
-          android:layout_marginBottom="16dp"
-          android:layout_weight="1"
-          android:src="@drawable/appypos" />
+        android:text="www.appypos.com" />
 
 </RelativeLayout>

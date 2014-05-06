@@ -52,7 +52,7 @@ public class ItemListAdapter extends ArrayAdapter<ItemInfo> {
 		View item = convertView;
 		final ViewHolder holder;
 
-		// 뷰 설정
+		// ë·° ì„¤ì •
 		if (item == null) {
 			LayoutInflater vi = (LayoutInflater) getContext().getSystemService(
 					Context.LAYOUT_INFLATER_SERVICE);
@@ -64,7 +64,7 @@ public class ItemListAdapter extends ArrayAdapter<ItemInfo> {
 		}
 		item.setId(position);
 		
-		// 뷰의 속성값 얻기
+		// ë·°ì�˜ ì†�ì„±ê°’ ì–»ê¸°
 		final ItemInfo value = getItem(position);
 		if (value == null) {
 			return item;
@@ -79,11 +79,12 @@ public class ItemListAdapter extends ArrayAdapter<ItemInfo> {
 
 	// =====================================================================================================
 	/**
-	 * 아이템 UI 요소들
+	 * ì•„ì�´í…œ UI ìš”ì†Œë“¤
 	 */
 	private class ViewHolder {
 
 		public RelativeLayout rlParent;
+		public RelativeLayout rlTextParent;
 		public ImageView ivThumb;
 		public TextView tvTitle;
 		public TextView tvDesc;
@@ -92,6 +93,7 @@ public class ItemListAdapter extends ArrayAdapter<ItemInfo> {
 
 			// get views
 			rlParent	= (RelativeLayout) parent.findViewById(R.id.rlParent);
+			rlTextParent	= (RelativeLayout) parent.findViewById(R.id.rlTextParent);
 			ivThumb		= (ImageView) parent.findViewById(R.id.ivThumb);
 			tvTitle 	= (TextView) parent.findViewById(R.id.tvTitle);
 			tvDesc		= (TextView) parent.findViewById(R.id.tvDesc);
@@ -110,6 +112,7 @@ public class ItemListAdapter extends ArrayAdapter<ItemInfo> {
 			//. Category
 			PRJFUNC.mGrp.relayoutView(ivThumb, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.relayoutView(rlParent, LayoutLib.LP_RelativeLayout);
+//			PRJFUNC.mGrp.relayoutView(rlTextParent, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.relayoutView(tvTitle, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.setTextViewFontScale(tvTitle);
 			PRJFUNC.mGrp.relayoutView(tvDesc, LayoutLib.LP_RelativeLayout);

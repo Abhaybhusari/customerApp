@@ -57,7 +57,7 @@ public class MenuFragment extends Fragment {
 		}
 
 		RelativeLayout rlPrinter = (RelativeLayout)v.findViewById(R.id.rlPrinter);
-	//	if(isDemo) rlPrinter.setVisibility(View.GONE);
+		if(isDemo) rlPrinter.setVisibility(View.GONE);
 		rlPrinter.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -69,7 +69,7 @@ public class MenuFragment extends Fragment {
 		});
 		
 		RelativeLayout rlFavourites = (RelativeLayout)v.findViewById(R.id.rlFavourites);
-		//if(isDemo) rlFavourites.setVisibility(View.GONE);
+		if(isDemo) rlFavourites.setVisibility(View.GONE);
 		rlFavourites.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -84,8 +84,8 @@ public class MenuFragment extends Fragment {
 		});
 		
 		RelativeLayout rlBookTable = (RelativeLayout)v.findViewById(R.id.rlBookTable);
-		//if(isDemo) rlBookTable.setVisibility(View.GONE);
-		/*rlBookTable.setOnClickListener(new OnClickListener() {
+		if(isDemo) rlBookTable.setVisibility(View.GONE);
+		rlBookTable.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -93,11 +93,11 @@ public class MenuFragment extends Fragment {
 				((MainActivity)getActivity()).getSlidingMenu().showContent();
 				((MainActivity)getActivity()).goBookTable();
 			}
-		});*/
+		});
 
 		RelativeLayout rlReserveRoom = (RelativeLayout)v.findViewById(R.id.rlReserveRoom);
-		//if(isDemo) rlReserveRoom.setVisibility(View.GONE);
-	/*	rlReserveRoom.setOnClickListener(new OnClickListener() {
+		if(isDemo) rlReserveRoom.setVisibility(View.GONE);
+		rlReserveRoom.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -105,11 +105,11 @@ public class MenuFragment extends Fragment {
 				((MainActivity)getActivity()).getSlidingMenu().showContent();
 				((MainActivity)getActivity()).goBookRoom(true, null);
 			}
-		});*/
+		});
 		
 		RelativeLayout rlExtendStay = (RelativeLayout)v.findViewById(R.id.rlExtendStay);
-	//	if(isDemo) rlExtendStay.setVisibility(View.GONE);
-	/*	rlExtendStay.setOnClickListener(new OnClickListener() {
+		if(isDemo) rlExtendStay.setVisibility(View.GONE);
+		rlExtendStay.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -117,10 +117,10 @@ public class MenuFragment extends Fragment {
 				((MainActivity)getActivity()).getSlidingMenu().showContent();
 				((MainActivity)getActivity()).goExtendStay();
 			}
-		});*/
+		});
 		
 		RelativeLayout rlRoomBill = (RelativeLayout)v.findViewById(R.id.rlRoomBill);
-	//	if(isDemo) rlRoomBill.setVisibility(View.GONE);
+		if(isDemo) rlRoomBill.setVisibility(View.GONE);
 		rlRoomBill.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -132,7 +132,7 @@ public class MenuFragment extends Fragment {
 		});
 		
 		RelativeLayout rlAlarm = (RelativeLayout)v.findViewById(R.id.rlAlarm);
-	//	if(isDemo) rlAlarm.setVisibility(View.GONE);
+		if(isDemo) rlAlarm.setVisibility(View.GONE);
 		rlAlarm.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -150,7 +150,6 @@ public class MenuFragment extends Fragment {
 		RelativeLayout rlAdditionalAcct = (RelativeLayout)v.findViewById(R.id.rlAdditionAccount);
 		String allowed = PrefValue.getString(getActivity(), R.string.pref_hotel_allowed);
 		//if(allowed.equalsIgnoreCase("false")) rlAdditionalAcct.setVisibility(View.GONE);
-		if(isDemo) rlAdditionalAcct.setVisibility(View.GONE);
 		rlAdditionalAcct.setOnClickListener(new OnClickListener() {
 			
 			@Override

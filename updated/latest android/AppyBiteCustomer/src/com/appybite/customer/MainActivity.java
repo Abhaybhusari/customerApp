@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -62,6 +63,7 @@ import com.yj.commonlib.dialog.MessageBox;
 import com.yj.commonlib.image.AnimateFirstDisplayListener;
 import com.yj.commonlib.network.NetworkUtils;
 import com.yj.commonlib.pref.PrefValue;
+
 import com.yj.commonlib.screen.LayoutLib;
 import com.yj.commonlib.screen.PRJFUNC;
 import com.yj.commonlib.util.DeviceUtil;
@@ -111,7 +113,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 
 		updateLCD();
 		// - update position
+
+		// int orientation = getResources().getConfiguration().orientation;
 		if (!PRJFUNC.DEFAULT_SCREEN) {
+			scaleView();
 		}
 
 		if (DeviceUtil.isTabletByRes(this))
@@ -139,22 +144,6 @@ public class MainActivity extends SlidingFragmentActivity implements
 		// );
 		// MessageBox.OK(this, "", strMsg);
 	}
-
-/*	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
-		super.onConfigurationChanged(newConfig);
-
-		int ot = getResources().getConfiguration().orientation;
-		switch (ot) {
-		case Configuration.ORIENTATION_LANDSCAPE:
-			setContentView(R.layout.activity_main_tab);
-			break;
-		case Configuration.ORIENTATION_PORTRAIT:
-			setContentView(R.layout.activity_main);
-			break;
-		}
-	}*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -372,7 +361,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 					PrefValue.getString(this, R.string.pref_hotel_logo),
 					ivHotelLogo, null, animateFirstListener);
 			tvHotelName.setText(PrefValue.getString(this,
-					R.string.pref_hotel_name));
+					R.string.pref_hotel_welcome_name));
 		}
 
 		setTitle("Welcome");
@@ -1971,10 +1960,14 @@ public class MainActivity extends SlidingFragmentActivity implements
 		if (youTubePlayerFragment == null)
 			return;
 
+		int orientation = getResources().getConfiguration().orientation;
 		FrameLayout fl = (FrameLayout) findViewById(R.id.fl_fragment_youtube);
-		fl.setVisibility(View.VISIBLE);
-
 		FragmentManager fm = getSupportFragmentManager();
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			int width = getWindowManager().getDefaultDisplay().getWidth();
+			fl.setLayoutParams(new RelativeLayout.LayoutParams(width / 2, 400));
+		}
+		fl.setVisibility(View.VISIBLE);
 		FragmentTransaction ft = fm.beginTransaction();
 		ft.show(youTubePlayerFragment);
 		ft.commit();

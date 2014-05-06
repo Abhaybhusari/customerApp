@@ -62,14 +62,6 @@
             android:text="@string/hello_world"
             android:textColor="@color/White"
             android:textSize="12sp" />
-        
-        <Button
-            android:id="@+id/btDelete"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_delete"
-            android:visibility="gone" />
     </RelativeLayout>
 
 </RelativeLayout>

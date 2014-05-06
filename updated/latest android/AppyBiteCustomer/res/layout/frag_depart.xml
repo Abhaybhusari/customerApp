@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2f363f" >
+    android:background="@drawable/bg_default_restaurant" >
 
     <RelativeLayout
         android:id="@+id/rlDepartInfo"
@@ -13,9 +13,9 @@
             android:id="@+id/ivDepartBg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/bg_default_category"
             android:contentDescription="@string/hello_world"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_default_category" />
 
         <ImageView
             android:id="@+id/ivShadowTop"
@@ -51,6 +51,12 @@
         android:id="@+id/pbCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <com.appybite.customer.HorizontalListView
+        android:id="@+id/hlvCategoryList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>

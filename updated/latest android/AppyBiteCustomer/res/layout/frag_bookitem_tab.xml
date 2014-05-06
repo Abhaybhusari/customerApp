@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin"
                 android:text="Select from the available time"
-                android:textSize="20sp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:id="@+id/llAvailTime"

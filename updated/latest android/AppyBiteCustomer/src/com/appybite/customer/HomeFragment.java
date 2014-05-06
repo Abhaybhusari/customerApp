@@ -97,6 +97,6 @@ public class HomeFragment extends Fragment {
 		//. Hotel Info
 		ImageLoader.getInstance().displayImage(PrefValue.getString(getActivity(), R.string.pref_hotel_bg), ivHotelBg, options, animateFirstListener);
 		ImageLoader.getInstance().displayImage(PrefValue.getString(getActivity(), R.string.pref_hotel_logo), ivHotelLogo, null, animateFirstListener);
-		tvHotelName.setText(PrefValue.getString(getActivity(), R.string.pref_hotel_name));
+		tvHotelName.setText(PrefValue.getString(getActivity(), R.string.pref_hotel_welcome_name));
 	}
 }

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -99,226 +100,266 @@ public class ItemDetailsFragment extends Fragment {
 
 	private ProgressBar pbCategory;
 	private boolean bPlay, bBookable;
-	
+
 	private EditText etRoomNo;
 
 	private boolean isDemo;
-	
+	private int orientation = 0;
+
 	public ItemDetailsFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		setRetainInstance(true);
 		View v = null;
-		if (DeviceUtil.isTabletByRes(getActivity()))
-			v = inflater.inflate(R.layout.frag_itemdetails_tab, container,
-					false);
-		else
-			v = inflater.inflate(R.layout.frag_itemdetails, container, false);
+
+		orientation = getResources().getConfiguration().orientation;
+
+		if (DeviceUtil.isTabletByRes(getActivity())) {
+			if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+				v = inflater.inflate(R.layout.frag_itemdetails_tab, container,
+						false);
+			} else {
+				v = inflater.inflate(R.layout.land_itemdetails_tab, container,
+						false);
+			}
+		} else {
+			if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+				v = inflater.inflate(R.layout.frag_itemdetails, container,
+						false);
+			} else {
+				v = inflater.inflate(R.layout.land_frag_itemdetails, container,
+						false);
+			}
+		}
 
 		isDemo = PrefValue.getBoolean(getActivity(), R.string.pref_app_demo);
-		
+
 		updateLCD(v);
 
 		// - update position
 		if (!PRJFUNC.DEFAULT_SCREEN) {
 			scaleView(v);
 		}
-		
-		if(departInfo.isRestaurant && !isDemo)
+
+		if (departInfo.isRestaurant && !isDemo)
 			loadSubInfo();
-		
+
 		return v;
 	}
-	  
+
 	private void updateLCD(View v) {
-		
+
 		if (PRJFUNC.mGrp == null) {
 			PRJFUNC.resetGraphValue(getActivity());
 		}
 
-		if(departInfo.id > 0) {
+		if (departInfo.id > 0) {
 			options = new DisplayImageOptions.Builder()
-				.showImageOnLoading(R.drawable.bg_default_category)
-				.showImageForEmptyUri(R.drawable.bg_default_category)
-				.showImageOnFail(R.drawable.bg_default_category)
-				.cacheInMemory(false)
-				.cacheOnDisc(true)
-				.bitmapConfig(Bitmap.Config.RGB_565)
-				.build();
+					.showImageOnLoading(R.drawable.bg_default_category)
+					.showImageForEmptyUri(R.drawable.bg_default_category)
+					.showImageOnFail(R.drawable.bg_default_category)
+					.cacheInMemory(false).cacheOnDisc(true)
+					.bitmapConfig(Bitmap.Config.RGB_565).build();
 		} else {
 			options = new DisplayImageOptions.Builder()
-				.showImageOnLoading(R.drawable.bg_default_food)
-				.showImageForEmptyUri(R.drawable.bg_default_food)
-				.showImageOnFail(R.drawable.bg_default_food)
-				.cacheInMemory(false)
-				.cacheOnDisc(true)
-				.bitmapConfig(Bitmap.Config.RGB_565)
-				.build();
+					.showImageOnLoading(R.drawable.bg_default_food)
+					.showImageForEmptyUri(R.drawable.bg_default_food)
+					.showImageOnFail(R.drawable.bg_default_food)
+					.cacheInMemory(false).cacheOnDisc(true)
+					.bitmapConfig(Bitmap.Config.RGB_565).build();
 		}
 
-		rlItemInfo = (RelativeLayout)v.findViewById(R.id.rlItemInfo);
-		ivImage = (ImageView)v.findViewById(R.id.ivImage);
-		ImageLoader.getInstance().displayImage(itemInfo.thumb, ivImage, options, animateFirstListener);
-		
-		ivPlay = (ImageView)v.findViewById(R.id.ivPlay);
+		rlItemInfo = (RelativeLayout) v.findViewById(R.id.rlItemInfo);
+		ivImage = (ImageView) v.findViewById(R.id.ivImage);
+		ImageLoader.getInstance().displayImage(itemInfo.thumb, ivImage,
+				options, animateFirstListener);
+
+		ivPlay = (ImageView) v.findViewById(R.id.ivPlay);
 		String videoID = getVideoID(itemInfo.video);
 		// String videoID = itemInfo.video;
-		if(videoID == null || videoID.trim().length() == 0) {
+		if (videoID == null || videoID.trim().length() == 0) {
 			ivPlay.setVisibility(View.GONE);
 		} else {
 			ivPlay.setVisibility(View.VISIBLE);
-			
+
 			Log.i("Youtube", itemInfo.video + " => " + videoID);
-			((MainActivity)getActivity()).addYoutubeView(videoID);
+			((MainActivity) getActivity()).addYoutubeView(videoID);
 		}
 		ivPlay.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				if(bPlay) {
-					((MainActivity)getActivity()).hideYoutubeView();
+
+				if (bPlay) {
+					((MainActivity) getActivity()).hideYoutubeView();
 					ivPlay.setBackgroundResource(R.drawable.btn_play);
 					bPlay = false;
 				} else {
-					((MainActivity)getActivity()).showYoutubeView();
+					((MainActivity) getActivity()).showYoutubeView();
 					ivPlay.setBackgroundResource(R.drawable.btn_pause);
 					bPlay = true;
 				}
 			}
 		});
-		
-		tvTitle = (TextView)v.findViewById(R.id.tvTitle);
+
+		tvTitle = (TextView) v.findViewById(R.id.tvTitle);
 		tvTitle.setText(itemInfo.title);
-		
-		ivFavourites = (ImageView)v.findViewById(R.id.ivFavourites);
-		if(isDemo) ivFavourites.setVisibility(View.INVISIBLE);
+
+		ivFavourites = (ImageView) v.findViewById(R.id.ivFavourites);
+		if (isDemo)
+			ivFavourites.setVisibility(View.INVISIBLE);
 		ivFavourites.setTag(0);
 		ivFavourites.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				updateFavouriteItem(ivFavourites.getTag().toString().equalsIgnoreCase("0"));
+
+				updateFavouriteItem(ivFavourites.getTag().toString()
+						.equalsIgnoreCase("0"));
 			}
 		});
-		
-		tvDesc = (TextView)v.findViewById(R.id.tvDesc);
-		/*if(isDemo) 
-			tvDesc.setText("Demo verion doesn't provide description");
-		else*/
-			tvDesc.setText(itemInfo.desc);
-		
-		tvPrice = (TextView)v.findViewById(R.id.tvPrice);
+
+		tvDesc = (TextView) v.findViewById(R.id.tvDesc);
+		/*
+		 * if(isDemo) tvDesc.setText("Demo verion doesn't provide description");
+		 * else
+		 */
+		tvDesc.setText(itemInfo.desc);
+
+		tvPrice = (TextView) v.findViewById(R.id.tvPrice);
 		float price;
-		if (itemInfo.price != null) 
+		if (itemInfo.price != null)
 			price = Float.parseFloat(itemInfo.price);
 		else
 			price = 0;
-		if(price == 0)
+		if (price == 0)
 			tvPrice.setText("Free");
 		else
-			tvPrice.setText(String.format("%s %.2f", PrefValue.getString(getActivity(), R.string.pref_currency), price));
-		
-		etMsg = (EditText)v.findViewById(R.id.etMsg);
+			tvPrice.setText(String.format("%s %.2f",
+					PrefValue.getString(getActivity(), R.string.pref_currency),
+					price));
+
+		etMsg = (EditText) v.findViewById(R.id.etMsg);
 		if (isDemo) {
 			etMsg.setVisibility(View.GONE);
 		} else {
 			etMsg.setVisibility(View.VISIBLE);
 		}
-		
-		spCount = (Spinner)v.findViewById(R.id.spCount);
 
-		ArrayAdapter<CharSequence> adspin = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, new ArrayList<String>());
+		spCount = (Spinner) v.findViewById(R.id.spCount);
+
+		ArrayAdapter<CharSequence> adspin = new ArrayAdapter(getActivity(),
+				android.R.layout.simple_spinner_item, new ArrayList<String>());
 		for (int i = 1; i <= 20; i++) {
-			adspin.add(String.valueOf(i));	
+			adspin.add(String.valueOf(i));
 		}
-        adspin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spCount.setAdapter(adspin);
-        
-		btAddOrder = (Button)v.findViewById(R.id.btAddOrder);
-		if(departInfo.id == 74 && departInfo.title.equalsIgnoreCase("Rooms/Suites")) {
+		adspin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spCount.setAdapter(adspin);
+
+		btAddOrder = (Button) v.findViewById(R.id.btAddOrder);
+		if (departInfo.id == 74
+				&& departInfo.title.equalsIgnoreCase("Rooms/Suites")) {
 
 			btAddOrder.setVisibility(View.INVISIBLE);
 			bBookable = true;
-		} 
+		}
 		btAddOrder.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 
-				/*if(isDemo) {
-					MessageBox.OK(getActivity(), "Alert", "You can't add order in demo version.");
-					return;
-				}*/
+				/*
+				 * if(isDemo) { MessageBox.OK(getActivity(), "Alert",
+				 * "You can't add order in demo version."); return; }
+				 */
 				if (isDemo) {
-					/*PrefValue.setString(getActivity(), R.string.pref_room_no, etRoomNo.toString());
-					
-					String pay_type = LocalOrderListDatabase.pay_type_charge_room;
-					String status = LocalOrderListDatabase.status_open;
-					
-					LocalOrderListDatabase foodDB = new LocalOrderListDatabase(getActivity());
-					ExtrasDatabase extraDB = new ExtrasDatabase(getActivity());
-					ModifierDatabase modifierDB = new ModifierDatabase(getActivity());
-					
-					String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-					String c_id = PrefValue.getString(getActivity(), R.string.pref_customer_id);
-					
-					String msg = etMsg.getText().toString();
-					String order_type = PrefValue.getString(getActivity(), R.string.pref_order_type);
-					itemInfo.qnt = Integer.valueOf(spCount.getSelectedItem().toString());
-					
-					// For demo. it will be replace with real price.
-					if (itemInfo.price == null)
-						itemInfo.price = "0";
-
-					foodDB.insert(hotel_id, c_id, itemInfo.id, itemInfo.title, itemInfo.price, itemInfo.qnt, msg, String.valueOf(departInfo.id), departInfo.title, order_type);*/
-					//inserNewOrderForDemo();
-					if (" " != etRoomNo.getText().toString() && null != etRoomNo.getText().toString()) {
-						PrefValue.setString(getActivity(), R.string.pref_customer_room_no, etRoomNo.getText().toString());
+					/*
+					 * PrefValue.setString(getActivity(), R.string.pref_room_no,
+					 * etRoomNo.toString());
+					 * 
+					 * String pay_type =
+					 * LocalOrderListDatabase.pay_type_charge_room; String
+					 * status = LocalOrderListDatabase.status_open;
+					 * 
+					 * LocalOrderListDatabase foodDB = new
+					 * LocalOrderListDatabase(getActivity()); ExtrasDatabase
+					 * extraDB = new ExtrasDatabase(getActivity());
+					 * ModifierDatabase modifierDB = new
+					 * ModifierDatabase(getActivity());
+					 * 
+					 * String hotel_id = PrefValue.getString(getActivity(),
+					 * R.string.pref_hotel_id); String c_id =
+					 * PrefValue.getString(getActivity(),
+					 * R.string.pref_customer_id);
+					 * 
+					 * String msg = etMsg.getText().toString(); String
+					 * order_type = PrefValue.getString(getActivity(),
+					 * R.string.pref_order_type); itemInfo.qnt =
+					 * Integer.valueOf(spCount.getSelectedItem().toString());
+					 * 
+					 * // For demo. it will be replace with real price. if
+					 * (itemInfo.price == null) itemInfo.price = "0";
+					 * 
+					 * foodDB.insert(hotel_id, c_id, itemInfo.id,
+					 * itemInfo.title, itemInfo.price, itemInfo.qnt, msg,
+					 * String.valueOf(departInfo.id), departInfo.title,
+					 * order_type);
+					 */
+					// inserNewOrderForDemo();
+					if (" " != etRoomNo.getText().toString()
+							&& null != etRoomNo.getText().toString()) {
+						PrefValue.setString(getActivity(),
+								R.string.pref_customer_room_no, etRoomNo
+										.getText().toString());
 						addToCart();
 					} else {
-						Toast.makeText(getActivity(), "Would you like to input your room no!", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(),
+								"Would you like to input your room no!",
+								Toast.LENGTH_LONG).show();
 					}
-					
-				}
-				else
+
+				} else
 					showOrderDlg();
 			}
 		});
 
-		btBookItem = (Button)v.findViewById(R.id.btBookItem);
+		btBookItem = (Button) v.findViewById(R.id.btBookItem);
 		btBookItem.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 
-				if(isDemo) {
-					MessageBox.OK(getActivity(), "Alert", "You can't book item in demo version.");
+				if (isDemo) {
+					MessageBox.OK(getActivity(), "Alert",
+							"You can't book item in demo version.");
 					return;
 				}
 
-				itemInfo.qnt = Integer.valueOf(spCount.getSelectedItem().toString());
-				
-				if(bBookable) {
-					((MainActivity)getActivity()).goBookRoom(false, itemInfo);
+				itemInfo.qnt = Integer.valueOf(spCount.getSelectedItem()
+						.toString());
+
+				if (bBookable) {
+					((MainActivity) getActivity()).goBookRoom(false, itemInfo);
 					return;
 				} else {
-					((MainActivity)getActivity()).goBookItem(false, departInfo, itemInfo);
+					((MainActivity) getActivity()).goBookItem(false,
+							departInfo, itemInfo);
 					return;
 				}
 			}
 		});
-		
-		btMore = (Button)v.findViewById(R.id.btMore);
+
+		btMore = (Button) v.findViewById(R.id.btMore);
 		btMore.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				((MainActivity)getActivity()).onBackPressed();
+				((MainActivity) getActivity()).onBackPressed();
 			}
 		});
 		if (isDemo) {
@@ -326,79 +367,86 @@ public class ItemDetailsFragment extends Fragment {
 		} else {
 			btMore.setVisibility(View.GONE);
 		}
-		
-		
+
 		rbScore = (RatingBar) v.findViewById(R.id.rbScore);
-		if(isDemo) rbScore.setClickable(false);
+		if (isDemo)
+			rbScore.setClickable(false);
 		rbScore.setMax(10);
 		rbScore.setProgress((int) (itemInfo.rate * 2));
 		rbScore.setOnTouchListener(new OnTouchListener() {
-		    @Override
-		    public boolean onTouch(View v, MotionEvent event) {
-		        if (event.getAction() == MotionEvent.ACTION_UP) {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_UP) {
 					final Dialog dialog = new Dialog(getActivity());
 					dialog.setTitle("Rate it!");
 					dialog.setContentView(R.layout.dialog_rating);
 
-					final RatingBar rbScore = (RatingBar)dialog.findViewById(R.id.reviewStars);
-					
-					Button btAccept = (Button)dialog.findViewById(R.id.reviewWriteAccept);
+					final RatingBar rbScore = (RatingBar) dialog
+							.findViewById(R.id.reviewStars);
+
+					Button btAccept = (Button) dialog
+							.findViewById(R.id.reviewWriteAccept);
 					btAccept.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
-							
+
 							updateRatingScore(rbScore.getProgress());
 							dialog.dismiss();
 						}
 					});
-					
-					Button btCancel = (Button)dialog.findViewById(R.id.reviewWriteCancel);
+
+					Button btCancel = (Button) dialog
+							.findViewById(R.id.reviewWriteCancel);
 					btCancel.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
-							
+
 							dialog.dismiss();
 						}
 					});
-					
+
 					dialog.show();
-		        }
-		        return true;
-		    }
+				}
+				return true;
+			}
 		});
 
-		tvModifiers = (TextView)v.findViewById(R.id.tvModifiers);
-		llModifiers = (LinearLayout)v.findViewById(R.id.llModifiers);
-		tvExtras = (TextView)v.findViewById(R.id.tvExtras);
-		llExtras = (LinearLayout)v.findViewById(R.id.llExtras);
-		
+		tvModifiers = (TextView) v.findViewById(R.id.tvModifiers);
+		llModifiers = (LinearLayout) v.findViewById(R.id.llModifiers);
+		tvExtras = (TextView) v.findViewById(R.id.tvExtras);
+		llExtras = (LinearLayout) v.findViewById(R.id.llExtras);
+
 		tvModifiers.setVisibility(View.GONE);
 		llModifiers.setVisibility(View.GONE);
 		tvExtras.setVisibility(View.GONE);
 		llExtras.setVisibility(View.GONE);
 
-		pbCategory = (ProgressBar)v.findViewById(R.id.pbCategory);
+		pbCategory = (ProgressBar) v.findViewById(R.id.pbCategory);
 		pbCategory.setVisibility(View.INVISIBLE);
-		
-		etRoomNo = (EditText)v.findViewById(R.id.etRoomNo);
-		
-		PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowTop), LayoutLib.LP_RelativeLayout);
+
+		etRoomNo = (EditText) v.findViewById(R.id.etRoomNo);
+
+		PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowTop),
+				LayoutLib.LP_RelativeLayout);
 	}
-	
+
 	private void scaleView(View v) {
 
 		if (PRJFUNC.mGrp == null) {
 			return;
 		}
-		
-		PRJFUNC.mGrp.relayoutView(rlItemInfo, LayoutLib.LP_RelativeLayout);
+		if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+			PRJFUNC.mGrp.relayoutView(rlItemInfo, LayoutLib.LP_RelativeLayout);
+		} else {
+			PRJFUNC.mGrp.relayoutView(rlItemInfo, LayoutLib.LP_LinearLayout);
+		}
 		PRJFUNC.mGrp.setTextViewFontScale(tvTitle);
 		PRJFUNC.mGrp.repaddingView(tvTitle);
 		PRJFUNC.mGrp.relayoutView(ivFavourites, LayoutLib.LP_RelativeLayout);
 		PRJFUNC.mGrp.relayoutView(ivPlay, LayoutLib.LP_RelativeLayout);
-		
+
 		PRJFUNC.mGrp.setTextViewFontScale(tvPrice);
 		PRJFUNC.mGrp.relayoutView(tvPrice, LayoutLib.LP_RelativeLayout);
 		PRJFUNC.mGrp.repaddingView(tvPrice);
@@ -410,7 +458,7 @@ public class ItemDetailsFragment extends Fragment {
 		PRJFUNC.mGrp.setEditTextFontScale(etMsg);
 		PRJFUNC.mGrp.relayoutView(etMsg, LayoutLib.LP_LinearLayout);
 
-		TextView tvCountLabel = (TextView)v.findViewById(R.id.tvCount); 
+		TextView tvCountLabel = (TextView) v.findViewById(R.id.tvCount);
 		PRJFUNC.mGrp.setTextViewFontScale(tvCountLabel);
 		PRJFUNC.mGrp.relayoutView(tvCountLabel, LayoutLib.LP_LinearLayout);
 
@@ -424,244 +472,264 @@ public class ItemDetailsFragment extends Fragment {
 		PRJFUNC.mGrp.relayoutView(tvExtras, LayoutLib.LP_LinearLayout);
 		PRJFUNC.mGrp.repaddingView(tvExtras);
 
-		PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowTop), LayoutLib.LP_RelativeLayout);
-		PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowBottom), LayoutLib.LP_RelativeLayout);
+		PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowTop),
+				LayoutLib.LP_RelativeLayout);
+		PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowBottom),
+				LayoutLib.LP_RelativeLayout);
 	}
-	
+
 	@Override
 	public void onDestroy() {
-		
+
 		CustomerHttpClient.stop();
-		
+
 		ImageLoader.getInstance().stop();
 		ImageLoader.getInstance().clearMemoryCache();
-		
-		((MainActivity)getActivity()).removeYoutubeView();
-		
+
+		((MainActivity) getActivity()).removeYoutubeView();
+
 		super.onDestroy();
 	}
+
 	@Override
 	public void onHiddenChanged(boolean hidden) {
 
-		if(bPlay) {
-			((MainActivity)getActivity()).hideYoutubeView();
+		if (bPlay) {
+			((MainActivity) getActivity()).hideYoutubeView();
 			ivPlay.setBackgroundResource(R.drawable.btn_play);
 			bPlay = false;
 		}
 
 		super.onHiddenChanged(hidden);
 	}
-	
+
 	public void setDepartInfo(DepartInfo departInfo, ItemInfo itemInfo) {
-		
+
 		this.departInfo = departInfo;
 		this.itemInfo = itemInfo;
 	}
-	
+
 	public void loadSubInfo() {
-		
+
 		aryExtraList.clear();
 		aryModifierList.clear();
 
 		if (NetworkUtils.haveInternet(getActivity())) {
-			
-			//. Restaurant :  http://www.appyorder.com/pro_version/webservice_cashier_fd/new/GetExtraModifier.php?hotel_id=6759&id=2414
+
+			// . Restaurant :
+			// http://www.appyorder.com/pro_version/webservice_cashier_fd/new/GetExtraModifier.php?hotel_id=6759&id=2414
 			String url = "http://www.appyorder.com/pro_version/webservice_cashier_fd/new/GetExtraModifier.php";
-			String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-			
+			String hotel_id = PrefValue.getString(getActivity(),
+					R.string.pref_hotel_id);
+
 			RequestParams params = new RequestParams();
 			params.add("hotel_id", hotel_id);
 			params.add("id", itemInfo.id);
-			
+
 			pbCategory.setVisibility(View.VISIBLE);
-			CustomerHttpClient.getFromFullService(url, params, new AsyncHttpResponseHandler() {
-				@Override
-				public void onFinish() {
-					
-					pbCategory.setVisibility(View.INVISIBLE);
-					updateExtras();
-					updateModifiers();
-					
-					super.onFinish();
-				}
+			CustomerHttpClient.getFromFullService(url, params,
+					new AsyncHttpResponseHandler() {
+						@Override
+						public void onFinish() {
 
-				@Override
-				public void onFailure(int statusCode, Header[] headers,	byte[] errorResponse, Throwable e) {
-					
-					Toast.makeText(getActivity(), "Connection was lost (" + statusCode + ")", Toast.LENGTH_LONG).show();
-					super.onFailure(statusCode, headers, errorResponse, e);
-				}
-				
-	            @Override
-	            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-	                // Pull out the first event on the public timeline
-	            	try {
+							pbCategory.setVisibility(View.INVISIBLE);
+							updateExtras();
+							updateModifiers();
 
-	            		String result = new String(response);
-	            		result = result.replace("({", "{");
-	            		result = result.replace("})", "}");
-	            		Log.i("HTTP Response <<<", result);
-	            		JSONObject jsonObject = new JSONObject(result);
-            			if(jsonObject.has("extra") && !jsonObject.isNull("extra"))
-            			{
-    		            	/*
-    						{
-    						    "status": "true",
-    						    "data": [
-    				            {
-    				                "id": "50",
-    				                "price": "30",
-    				                "title": "cheese",
-    				                "image": "http://www.roomallocator.com/restaurant/extra_thumbnail/small_544686screenshot368jpg",
-    				                "thumbnail": "http://www.roomallocator.com/restaurant/extra_thumbnail/small_544686screenshot368jpg",
-    				                "qnt": "0"
-    				            }
-    						    ]
-    						}
-    		            	*/
-            				JSONObject extra = jsonObject.getJSONObject("extra");
-            				String status = extra.getString("status");
-            				if(status.equalsIgnoreCase("true"))
-            				{
-    	            			JSONArray data = extra.getJSONArray("data");
-    	            			for (int i = 0; i < data.length(); i++) {
-    								JSONObject item = data.getJSONObject(i);
-    								
-    								ExtraInfo info = new ExtraInfo();
-    								info.id = item.getString("id");
-    								info.title = item.getString("title");
-    								info.price = item.getString("price");
-    								info.image = item.getString("image");
-    								info.thumb = item.getString("thumbnail");
-    								
-    								aryExtraList.add(info);
-    							}
-            				}
-            			}
+							super.onFinish();
+						}
 
-            			if(jsonObject.has("modifier") && !jsonObject.isNull("modifier"))
-            			{
-            				/*
-							{
-							    "id": "487",
-							    "price": "47",
-							    "name": "Package of botatos",
-							    "property": "",
-							    "group": "0",
-							    "qnt": "0"
-							} 
-            				 */
-            				JSONObject modifier = jsonObject.getJSONObject("modifier");
-            				String status = modifier.getString("status");
-            				if(status.equalsIgnoreCase("true"))
-            				{
-    	            			JSONArray data = modifier.getJSONArray("data");
-    	            			for (int i = 0; i < data.length(); i++) {
-    								JSONObject item = data.getJSONObject(i);
-    								
-    								ModifierInfo info = new ModifierInfo();
-    								info.id = item.getString("id");
-    								info.title = item.getString("name");
-    								info.price = item.getString("price");
-    								
-    								aryModifierList.add(info);
-    							}
-            				}
-            			}
-	            		
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Toast.makeText(getActivity(), "Invalid Data",Toast.LENGTH_LONG).show();
-					} 
-	            }
-	        });
+						@Override
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] errorResponse, Throwable e) {
+
+							Toast.makeText(getActivity(),
+									"Connection was lost (" + statusCode + ")",
+									Toast.LENGTH_LONG).show();
+							super.onFailure(statusCode, headers, errorResponse,
+									e);
+						}
+
+						@Override
+						public void onSuccess(int statusCode, Header[] headers,
+								byte[] response) {
+							// Pull out the first event on the public timeline
+							try {
+
+								String result = new String(response);
+								result = result.replace("({", "{");
+								result = result.replace("})", "}");
+								Log.i("HTTP Response <<<", result);
+								JSONObject jsonObject = new JSONObject(result);
+								if (jsonObject.has("extra")
+										&& !jsonObject.isNull("extra")) {
+									/*
+									 * { "status": "true", "data": [ { "id":
+									 * "50", "price": "30", "title": "cheese",
+									 * "image":
+									 * "http://www.roomallocator.com/restaurant/extra_thumbnail/small_544686screenshot368jpg"
+									 * , "thumbnail":
+									 * "http://www.roomallocator.com/restaurant/extra_thumbnail/small_544686screenshot368jpg"
+									 * , "qnt": "0" } ] }
+									 */
+									JSONObject extra = jsonObject
+											.getJSONObject("extra");
+									String status = extra.getString("status");
+									if (status.equalsIgnoreCase("true")) {
+										JSONArray data = extra
+												.getJSONArray("data");
+										for (int i = 0; i < data.length(); i++) {
+											JSONObject item = data
+													.getJSONObject(i);
+
+											ExtraInfo info = new ExtraInfo();
+											info.id = item.getString("id");
+											info.title = item
+													.getString("title");
+											info.price = item
+													.getString("price");
+											info.image = item
+													.getString("image");
+											info.thumb = item
+													.getString("thumbnail");
+
+											aryExtraList.add(info);
+										}
+									}
+								}
+
+								if (jsonObject.has("modifier")
+										&& !jsonObject.isNull("modifier")) {
+									/*
+									 * { "id": "487", "price": "47", "name":
+									 * "Package of botatos", "property": "",
+									 * "group": "0", "qnt": "0" }
+									 */
+									JSONObject modifier = jsonObject
+											.getJSONObject("modifier");
+									String status = modifier
+											.getString("status");
+									if (status.equalsIgnoreCase("true")) {
+										JSONArray data = modifier
+												.getJSONArray("data");
+										for (int i = 0; i < data.length(); i++) {
+											JSONObject item = data
+													.getJSONObject(i);
+
+											ModifierInfo info = new ModifierInfo();
+											info.id = item.getString("id");
+											info.title = item.getString("name");
+											info.price = item
+													.getString("price");
+
+											aryModifierList.add(info);
+										}
+									}
+								}
+
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								Toast.makeText(getActivity(), "Invalid Data",
+										Toast.LENGTH_LONG).show();
+							}
+						}
+					});
 
 		} else {
-			Toast.makeText(getActivity(), "No Internet Connection",Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "No Internet Connection",
+					Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	private void updateExtras() {
-		
+
 		llExtras.removeAllViews();
-		
-		if(aryExtraList.size() > 0) {
-			
+
+		if (aryExtraList.size() > 0) {
+
 			tvExtras.setVisibility(View.VISIBLE);
 			llExtras.setVisibility(View.VISIBLE);
-			
+
 			for (int i = 0; i < aryExtraList.size(); i++) {
 
 				final ExtraInfo value = aryExtraList.get(i);
 
-				LayoutInflater vi = (LayoutInflater) getActivity().getSystemService(
-						Context.LAYOUT_INFLATER_SERVICE);
-				View item = vi.inflate(R.layout.item_extralist, llExtras, false);
+				LayoutInflater vi = (LayoutInflater) getActivity()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View item = vi
+						.inflate(R.layout.item_extralist, llExtras, false);
 
 				CheckBox cbTitle = (CheckBox) item.findViewById(R.id.cbTitle);
 				TextView tvPrice = (TextView) item.findViewById(R.id.tvPrice);
 				final Button btQnt = (Button) item.findViewById(R.id.btQnt);
 
 				if (!PRJFUNC.DEFAULT_SCREEN) {
-					
+
 					PRJFUNC.mGrp.setButtonFontScale(cbTitle);
-					PRJFUNC.mGrp.relayoutView(cbTitle, LayoutLib.LP_RelativeLayout);
+					PRJFUNC.mGrp.relayoutView(cbTitle,
+							LayoutLib.LP_RelativeLayout);
 					PRJFUNC.mGrp.setTextViewFontScale(tvPrice);
 					PRJFUNC.mGrp.setButtonFontScale(btQnt);
-					PRJFUNC.mGrp.relayoutView(btQnt, LayoutLib.LP_RelativeLayout);
+					PRJFUNC.mGrp.relayoutView(btQnt,
+							LayoutLib.LP_RelativeLayout);
 				}
-				
+
 				cbTitle.setText(value.title);
-				if(value.qnt > 0) cbTitle.setChecked(true);
-				else cbTitle.setChecked(false);
+				if (value.qnt > 0)
+					cbTitle.setChecked(true);
+				else
+					cbTitle.setChecked(false);
 				cbTitle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-						
-						if(arg1 && value.qnt == 0)
+					public void onCheckedChanged(CompoundButton arg0,
+							boolean arg1) {
+
+						if (arg1 && value.qnt == 0)
 							value.qnt = 1;
-						else if(!arg1)
+						else if (!arg1)
 							value.qnt = 0;
-						
+
 						btQnt.setText(String.valueOf(value.qnt));
 					}
 				});
 				float price = Float.parseFloat(value.price);
-				if(price > 0)
+				if (price > 0)
 					tvPrice.setText("+" + String.format("%.2f", price));
 				else
 					tvPrice.setText("");
 				btQnt.setText(String.valueOf(value.qnt));
 				final int position = i;
 				btQnt.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						NumberPickerDlg countDlg = new NumberPickerDlg(getActivity(), value.qnt, new OnFinishedListener() {
-							
-							@Override
-							public void onOk(int number) {
-								
-								applyCount(position, number);
-							}
-						});
+						NumberPickerDlg countDlg = new NumberPickerDlg(
+								getActivity(), value.qnt,
+								new OnFinishedListener() {
+
+									@Override
+									public void onOk(int number) {
+
+										applyCount(position, number);
+									}
+								});
 						countDlg.show();
 					}
 				});
-				
+
 				llExtras.addView(item);
 			}
 		}
 	}
-	
+
 	private void updateModifiers() {
 
 		llModifiers.removeAllViews();
-		
-		if(aryModifierList.size() > 0) {
+
+		if (aryModifierList.size() > 0) {
 
 			tvModifiers.setVisibility(View.VISIBLE);
 			llModifiers.setVisibility(View.VISIBLE);
@@ -670,51 +738,54 @@ public class ItemDetailsFragment extends Fragment {
 
 				final ModifierInfo value = aryModifierList.get(i);
 
-				LayoutInflater vi = (LayoutInflater) getActivity().getSystemService(
-						Context.LAYOUT_INFLATER_SERVICE);
-				View item = vi.inflate(R.layout.item_modifierlist, llModifiers, false);
+				LayoutInflater vi = (LayoutInflater) getActivity()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View item = vi.inflate(R.layout.item_modifierlist, llModifiers,
+						false);
 				CheckBox cbTitle = (CheckBox) item.findViewById(R.id.cbTitle);
 				TextView tvPrice = (TextView) item.findViewById(R.id.tvPrice);
-				
+
 				if (!PRJFUNC.DEFAULT_SCREEN) {
 					PRJFUNC.mGrp.setButtonFontScale(cbTitle);
-					PRJFUNC.mGrp.relayoutView(cbTitle, LayoutLib.LP_RelativeLayout);
+					PRJFUNC.mGrp.relayoutView(cbTitle,
+							LayoutLib.LP_RelativeLayout);
 					PRJFUNC.mGrp.setTextViewFontScale(tvPrice);
 				}
-				
+
 				cbTitle.setText(value.title);
-				if(value.qnt > 0) cbTitle.setChecked(true);
+				if (value.qnt > 0)
+					cbTitle.setChecked(true);
 				cbTitle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-						
-						if(arg1)
+					public void onCheckedChanged(CompoundButton arg0,
+							boolean arg1) {
+
+						if (arg1)
 							value.qnt = 1;
 						else
 							value.qnt = 0;
 					}
 				});
 				float price = Float.parseFloat(value.price);
-				if(price > 0)
+				if (price > 0)
 					tvPrice.setText("+" + String.format("%.2f", price));
 				else
 					tvPrice.setText("");
-				
+
 				llModifiers.addView(item);
 			}
 		}
 	}
-	
-	private void applyCount(int position, int count)
-	{
+
+	private void applyCount(int position, int count) {
 		ExtraInfo value = aryExtraList.get(position);
 		value.qnt = count;
 		updateExtras();
 	}
-	
+
 	private void scanQRCode() {
-		
+
 		if (isIntentAvailable(getActivity())) {
 			Log.i("Scanner", "BarCode Scanner is Available");
 			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
@@ -723,16 +794,18 @@ public class ItemDetailsFragment extends Fragment {
 		} else if (isSdPresent() && MemoryStat(508220)) {
 			if (saveas(R.raw.scan)) {
 				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/barcode.apk")), "application/vnd.android.package-archive");
+				intent.setDataAndType(Uri.fromFile(new File(Environment
+						.getExternalStorageDirectory() + "/barcode.apk")),
+						"application/vnd.android.package-archive");
 				startActivity(intent);
 			} else {
 				market();
 			}
 		} else {
 			market();
-		}	
+		}
 	}
-	
+
 	private boolean isIntentAvailable(Context context) {
 		final PackageManager packageManager = context.getPackageManager();
 		final Intent intent = new Intent("com.google.zxing.client.android.SCAN");
@@ -812,58 +885,69 @@ public class ItemDetailsFragment extends Fragment {
 		}
 		return true;
 	}
-	
+
 	public void addToCart() {
-		
-		String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-		String c_id = PrefValue.getString(getActivity(), R.string.pref_customer_id);
-		
+
+		String hotel_id = PrefValue.getString(getActivity(),
+				R.string.pref_hotel_id);
+		String c_id = PrefValue.getString(getActivity(),
+				R.string.pref_customer_id);
+
 		String msg = etMsg.getText().toString();
-		String order_type = PrefValue.getString(getActivity(), R.string.pref_order_type);
+		String order_type = PrefValue.getString(getActivity(),
+				R.string.pref_order_type);
 		itemInfo.qnt = Integer.valueOf(spCount.getSelectedItem().toString());
 
-		LocalOrderListDatabase foodDB = new LocalOrderListDatabase(getActivity());
+		LocalOrderListDatabase foodDB = new LocalOrderListDatabase(
+				getActivity());
 		ExtrasDatabase extraDB = new ExtrasDatabase(getActivity());
 		ModifierDatabase modifierDB = new ModifierDatabase(getActivity());
-		
+
 		// For demo. it will be replace with real price.
 		if (itemInfo.price == null)
 			itemInfo.price = "0";
 
-		foodDB.insert(hotel_id, c_id, itemInfo.id, itemInfo.title, itemInfo.price, itemInfo.qnt, msg, String.valueOf(departInfo.id), departInfo.title, order_type);
-		
+		foodDB.insert(hotel_id, c_id, itemInfo.id, itemInfo.title,
+				itemInfo.price, itemInfo.qnt, msg,
+				String.valueOf(departInfo.id), departInfo.title, order_type);
+
 		for (int i = 0; i < aryExtraList.size(); i++) {
-			
+
 			ExtraInfo info = aryExtraList.get(i);
-			if(info.qnt > 0)
-				extraDB.insert(hotel_id, c_id, itemInfo.id, info.id, info.title, info.price, info.qnt);
+			if (info.qnt > 0)
+				extraDB.insert(hotel_id, c_id, itemInfo.id, info.id,
+						info.title, info.price, info.qnt);
 		}
-		
+
 		for (int i = 0; i < aryModifierList.size(); i++) {
-			
+
 			ModifierInfo info = aryModifierList.get(i);
-			if(info.qnt > 0)
-				modifierDB.insert(hotel_id, c_id, itemInfo.id, info.id, info.title, info.price, info.qnt);
+			if (info.qnt > 0)
+				modifierDB.insert(hotel_id, c_id, itemInfo.id, info.id,
+						info.title, info.price, info.qnt);
 		}
-		
+
 		foodDB.close();
 		extraDB.close();
 		modifierDB.close();
-		
-		if(DeviceUtil.isTabletByRes(getActivity()))
-			((MainActivity)getActivity()).goCart_Tab();
+
+		if (DeviceUtil.isTabletByRes(getActivity()))
+			((MainActivity) getActivity()).goCart_Tab();
 		else
-			((MainActivity)getActivity()).goCart();
+			((MainActivity) getActivity()).goCart();
 	}
-	
+
 	private void updateFavouriteItem(final boolean add) {
-		
+
 		if (NetworkUtils.haveInternet(getActivity())) {
-			
-			//. https://www.appyorder.com/pro_version/webservice_smart_app/new/insert_Cfav.php?order_type=regular&depart=restaurant&item_id=15&hotel_id=6759&title=asdas&cid=10&depart_id=1
-			String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-			String cid = PrefValue.getString(getActivity(), R.string.pref_customer_id);
-			
+
+			// .
+			// https://www.appyorder.com/pro_version/webservice_smart_app/new/insert_Cfav.php?order_type=regular&depart=restaurant&item_id=15&hotel_id=6759&title=asdas&cid=10&depart_id=1
+			String hotel_id = PrefValue.getString(getActivity(),
+					R.string.pref_hotel_id);
+			String cid = PrefValue.getString(getActivity(),
+					R.string.pref_customer_id);
+
 			RequestParams params = new RequestParams();
 			params.add("hotel_id", hotel_id);
 			params.add("depart", departInfo.title);
@@ -872,399 +956,466 @@ public class ItemDetailsFragment extends Fragment {
 			params.add("item_id", itemInfo.id);
 			params.add("title", itemInfo.title);
 			params.add("cid", cid);
-			if(!add)
+			if (!add)
 				params.add("status", "delete");
-			
+
 			pbCategory.setVisibility(View.VISIBLE);
-			CustomerHttpClient.get("new/insert_Cfav.php", params, new AsyncHttpResponseHandler() {
-				@Override
-				public void onFinish() {
-					
-					pbCategory.setVisibility(View.INVISIBLE);
-					super.onFinish();
-				}
+			CustomerHttpClient.get("new/insert_Cfav.php", params,
+					new AsyncHttpResponseHandler() {
+						@Override
+						public void onFinish() {
 
-				@Override
-				public void onFailure(int statusCode, Header[] headers,	byte[] errorResponse, Throwable e) {
-					
-					Toast.makeText(getActivity(), "Connection was lost (" + statusCode + ")", Toast.LENGTH_LONG).show();
-					super.onFailure(statusCode, headers, errorResponse, e);
-				}
-				
-	            @Override
-	            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-	                // Pull out the first event on the public timeline
-	            	try {
+							pbCategory.setVisibility(View.INVISIBLE);
+							super.onFinish();
+						}
 
-		            	/*
+						@Override
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] errorResponse, Throwable e) {
+
+							Toast.makeText(getActivity(),
+									"Connection was lost (" + statusCode + ")",
+									Toast.LENGTH_LONG).show();
+							super.onFailure(statusCode, headers, errorResponse,
+									e);
+						}
+
+						@Override
+						public void onSuccess(int statusCode, Header[] headers,
+								byte[] response) {
+							// Pull out the first event on the public timeline
+							try {
+
+								/*
 		            	*/
 
-	            		String result = new String(response);
-	            		result = result.replace("({", "{");
-	            		result = result.replace("})", "}");
-	            		Log.i("HTTP Response <<<", result);
-	            		JSONObject jsonObject = new JSONObject(result);
-	            		String status = jsonObject.getString("status");
-	            		if(status.equalsIgnoreCase("true")) {
-	            			
-	            			if(add) {
-	            				ivFavourites.setBackgroundResource(R.drawable.menu_favourites_on);
-	            				ivFavourites.setTag(1);
-	            			} else {
-	            				ivFavourites.setBackgroundResource(R.drawable.menu_favourites);
-	            				ivFavourites.setTag(0);
-	            			}
-	            			
-	            		} else {
-	            			String msg = jsonObject.getString("message"); 
-	            			MessageBox.OK(getActivity(), "Alert", msg);
-	            		}
-	            		
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Toast.makeText(getActivity(), "Invalid Data",Toast.LENGTH_LONG).show();
-					} 
-	            }
-	        });
+								String result = new String(response);
+								result = result.replace("({", "{");
+								result = result.replace("})", "}");
+								Log.i("HTTP Response <<<", result);
+								JSONObject jsonObject = new JSONObject(result);
+								String status = jsonObject.getString("status");
+								if (status.equalsIgnoreCase("true")) {
+
+									if (add) {
+										ivFavourites
+												.setBackgroundResource(R.drawable.menu_favourites_on);
+										ivFavourites.setTag(1);
+									} else {
+										ivFavourites
+												.setBackgroundResource(R.drawable.menu_favourites);
+										ivFavourites.setTag(0);
+									}
+
+								} else {
+									String msg = jsonObject
+											.getString("message");
+									MessageBox.OK(getActivity(), "Alert", msg);
+								}
+
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								Toast.makeText(getActivity(), "Invalid Data",
+										Toast.LENGTH_LONG).show();
+							}
+						}
+					});
 
 		} else {
-			Toast.makeText(getActivity(), "No Internet Connection",Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "No Internet Connection",
+					Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	public void updateRatingScore(int rate) {
-		
+
 		if (NetworkUtils.haveInternet(getActivity())) {
-			
-			//. https://www.appyorder.com/pro_version/webservice_smart_app/new/setrateitem.php?hotel_id=6759&item_id=554&user_id=5&rate=1
-			String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-			String c_id = PrefValue.getString(getActivity(), R.string.pref_customer_id);
-			
+
+			// .
+			// https://www.appyorder.com/pro_version/webservice_smart_app/new/setrateitem.php?hotel_id=6759&item_id=554&user_id=5&rate=1
+			String hotel_id = PrefValue.getString(getActivity(),
+					R.string.pref_hotel_id);
+			String c_id = PrefValue.getString(getActivity(),
+					R.string.pref_customer_id);
+
 			RequestParams params = new RequestParams();
 			params.add("hotel_id", hotel_id);
 			params.add("user_id", c_id);
 			params.add("item_id", itemInfo.id);
 			params.add("rate", String.valueOf(rate));
-			
+
 			pbCategory.setVisibility(View.VISIBLE);
-			CustomerHttpClient.get("new/setrateitem.php", params, new AsyncHttpResponseHandler() {
-				@Override
-				public void onFinish() {
-					
-					pbCategory.setVisibility(View.INVISIBLE);
-					updateExtras();
-					updateModifiers();
-					
-					super.onFinish();
-				}
+			CustomerHttpClient.get("new/setrateitem.php", params,
+					new AsyncHttpResponseHandler() {
+						@Override
+						public void onFinish() {
 
-				@Override
-				public void onFailure(int statusCode, Header[] headers,	byte[] errorResponse, Throwable e) {
-					
-					Toast.makeText(getActivity(), "Connection was lost (" + statusCode + ")", Toast.LENGTH_LONG).show();
-					super.onFailure(statusCode, headers, errorResponse, e);
-				}
-				
-	            @Override
-	            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-	                // Pull out the first event on the public timeline
-	            	try {
+							pbCategory.setVisibility(View.INVISIBLE);
+							updateExtras();
+							updateModifiers();
 
-	            		String result = new String(response);
-	            		result = result.replace("({", "{");
-	            		result = result.replace("})", "}");
-	            		Log.i("HTTP Response <<<", result);
-	            		JSONObject jsonObject = new JSONObject(result);
-	            		
-	            		String status = jsonObject.getString("status");
-	            		if(status.equalsIgnoreCase("true")) {
-	            			double rate = jsonObject.getDouble("rate");
-	            			rbScore.setProgress((int) (rate * 2));
-	            			itemInfo.rate = rate;
-	            			((MainActivity)getActivity()).updateItemList(itemInfo);
-	            		} else {
-	            			MessageBox.OK(getActivity(), "Result", jsonObject.getString("message"));
-	            		}
-	            		
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Toast.makeText(getActivity(), "Invalid Data",Toast.LENGTH_LONG).show();
-					} 
-	            }
-	        });
+							super.onFinish();
+						}
+
+						@Override
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] errorResponse, Throwable e) {
+
+							Toast.makeText(getActivity(),
+									"Connection was lost (" + statusCode + ")",
+									Toast.LENGTH_LONG).show();
+							super.onFailure(statusCode, headers, errorResponse,
+									e);
+						}
+
+						@Override
+						public void onSuccess(int statusCode, Header[] headers,
+								byte[] response) {
+							// Pull out the first event on the public timeline
+							try {
+
+								String result = new String(response);
+								result = result.replace("({", "{");
+								result = result.replace("})", "}");
+								Log.i("HTTP Response <<<", result);
+								JSONObject jsonObject = new JSONObject(result);
+
+								String status = jsonObject.getString("status");
+								if (status.equalsIgnoreCase("true")) {
+									double rate = jsonObject.getDouble("rate");
+									rbScore.setProgress((int) (rate * 2));
+									itemInfo.rate = rate;
+									((MainActivity) getActivity())
+											.updateItemList(itemInfo);
+								} else {
+									MessageBox.OK(getActivity(), "Result",
+											jsonObject.getString("message"));
+								}
+
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								Toast.makeText(getActivity(), "Invalid Data",
+										Toast.LENGTH_LONG).show();
+							}
+						}
+					});
 
 		} else {
-			Toast.makeText(getActivity(), "No Internet Connection",Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "No Internet Connection",
+					Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	private String getVideoID(String url) {
 
 		/*
-		 	http://www.youtube.com/embed/Woq5iX9XQhA?html5=1
-			http://www.youtube.com/watch?v=384IUU43bfQ
-			http://gdata.youtube.com/feeds/api/videos/xTmi7zzUa-M&whatever
-			
-			Woq5iX9XQhA
-			384IUU43bfQ
-			xTmi7zzUa-M
-		 * */
-		if(url == null || url.trim().length() == 0) {
+		 * http://www.youtube.com/embed/Woq5iX9XQhA?html5=1
+		 * http://www.youtube.com/watch?v=384IUU43bfQ
+		 * http://gdata.youtube.com/feeds/api/videos/xTmi7zzUa-M&whatever
+		 * 
+		 * Woq5iX9XQhA 384IUU43bfQ xTmi7zzUa-M
+		 */
+		if (url == null || url.trim().length() == 0) {
 			return null;
 		}
-		
+
 		String pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
 
-	    Pattern compiledPattern = Pattern.compile(pattern);
-	    Matcher matcher = compiledPattern.matcher(url);
+		Pattern compiledPattern = Pattern.compile(pattern);
+		Matcher matcher = compiledPattern.matcher(url);
 
-	    if(matcher.find()){
-	        return matcher.group();
-	    }
-	    
-	    return null;
+		if (matcher.find()) {
+			return matcher.group();
+		}
+
+		return null;
 	}
-	
+
 	private void showOrderDlg() {
-		
+
 		final Dialog dialog = new Dialog(getActivity(),
 				android.R.style.Theme_Translucent_NoTitleBar);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.dialog_addorder);
-		
-		Button btOldCode = (Button)dialog.findViewById(R.id.btOldCode);
+
+		Button btOldCode = (Button) dialog.findViewById(R.id.btOldCode);
 		btOldCode.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				
+
 				addToCart();
 				dialog.dismiss();
 			}
 		});
-		Button btTableCode = (Button)dialog.findViewById(R.id.btTableCode);
+		Button btTableCode = (Button) dialog.findViewById(R.id.btTableCode);
 		if (isDemo)
 			btTableCode.setVisibility(View.GONE);
 		btTableCode.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				
-				PrefValue.setString(getActivity(), R.string.pref_order_type, order_inrestaurant);
+
+				PrefValue.setString(getActivity(), R.string.pref_order_type,
+						order_inrestaurant);
 				scanQRCode();
 				dialog.dismiss();
 			}
 		});
-		Button btRoomCode = (Button)dialog.findViewById(R.id.btRoomCode);
+		Button btRoomCode = (Button) dialog.findViewById(R.id.btRoomCode);
 		if (isDemo)
 			btRoomCode.setVisibility(View.INVISIBLE);
 		btRoomCode.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				
-				PrefValue.setString(getActivity(), R.string.pref_order_type, order_inroom);
+
+				PrefValue.setString(getActivity(), R.string.pref_order_type,
+						order_inroom);
 				scanQRCode();
 				dialog.dismiss();
 			}
 		});
-		Button btCancel = (Button)dialog.findViewById(R.id.btCancel);
+		Button btCancel = (Button) dialog.findViewById(R.id.btCancel);
 		btCancel.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				
+
 				dialog.dismiss();
 			}
 		});
-		
-		Button btTest = (Button)dialog.findViewById(R.id.btTest);
+
+		Button btTest = (Button) dialog.findViewById(R.id.btTest);
 		btTest.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 
-				PrefValue.setString(getActivity(), R.string.pref_order_type, order_inroom);
-				PrefValue.setString(getActivity(), R.string.pref_order_code, "301");
+				PrefValue.setString(getActivity(), R.string.pref_order_type,
+						order_inroom);
+				PrefValue.setString(getActivity(), R.string.pref_order_code,
+						"301");
 				addToCart();
-				
+
 				dialog.dismiss();
 			}
 		});
 
-		TextView tvOldCode = (TextView)dialog.findViewById(R.id.tvOldCode);
-		String order_type = PrefValue.getString(getActivity(), R.string.pref_order_type, "");
-		String order_code = PrefValue.getString(getActivity(), R.string.pref_order_code, "");
-		if(order_type.length() > 0) {
-			tvOldCode.setText(String.format("Your last order place is\n%s %s\nWould you use it?", 
-					order_type.toUpperCase(),  
-					order_code));
+		TextView tvOldCode = (TextView) dialog.findViewById(R.id.tvOldCode);
+		String order_type = PrefValue.getString(getActivity(),
+				R.string.pref_order_type, "");
+		String order_code = PrefValue.getString(getActivity(),
+				R.string.pref_order_code, "");
+		if (order_type.length() > 0) {
+			tvOldCode.setText(String.format(
+					"Your last order place is\n%s %s\nWould you use it?",
+					order_type.toUpperCase(), order_code));
 		} else {
 			btOldCode.setVisibility(View.GONE);
 			tvOldCode.setVisibility(View.GONE);
-			ImageView iv1 = (ImageView)dialog.findViewById(R.id.iv1);
+			ImageView iv1 = (ImageView) dialog.findViewById(R.id.iv1);
 			iv1.setVisibility(View.GONE);
 		}
-		
+
 		if (PRJFUNC.mGrp != null) {
-			RelativeLayout rlAddOrderDlg = (RelativeLayout)dialog.findViewById(R.id.rlAddOrderDlg);
-			PRJFUNC.mGrp.relayoutView(rlAddOrderDlg, LayoutLib.LP_RelativeLayout);
-			ImageView ivQRCode = (ImageView)dialog.findViewById(R.id.ivQRCode);
+			RelativeLayout rlAddOrderDlg = (RelativeLayout) dialog
+					.findViewById(R.id.rlAddOrderDlg);
+			PRJFUNC.mGrp.relayoutView(rlAddOrderDlg,
+					LayoutLib.LP_RelativeLayout);
+			ImageView ivQRCode = (ImageView) dialog.findViewById(R.id.ivQRCode);
 			PRJFUNC.mGrp.relayoutView(ivQRCode, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.setTextViewFontScale(tvOldCode);
 			PRJFUNC.mGrp.relayoutView(tvOldCode, LayoutLib.LP_RelativeLayout);
-			
+
 			PRJFUNC.mGrp.setButtonFontScale(btOldCode);
 			PRJFUNC.mGrp.relayoutView(btOldCode, LayoutLib.LP_RelativeLayout);
-			
-			TextView tvNewCode = (TextView)dialog.findViewById(R.id.tvNewCode);
+
+			TextView tvNewCode = (TextView) dialog.findViewById(R.id.tvNewCode);
 			if (isDemo)
 				tvNewCode.setVisibility(View.GONE);
 			PRJFUNC.mGrp.setTextViewFontScale(tvNewCode);
 			PRJFUNC.mGrp.relayoutView(tvNewCode, LayoutLib.LP_RelativeLayout);
-			
+
 			PRJFUNC.mGrp.setTextViewFontScale(btTableCode);
 			PRJFUNC.mGrp.relayoutView(btTableCode, LayoutLib.LP_RelativeLayout);
-			
+
 			PRJFUNC.mGrp.setTextViewFontScale(btRoomCode);
 			PRJFUNC.mGrp.relayoutView(btRoomCode, LayoutLib.LP_RelativeLayout);
-			
+
 			PRJFUNC.mGrp.setTextViewFontScale(btCancel);
 			PRJFUNC.mGrp.relayoutView(btCancel, LayoutLib.LP_RelativeLayout);
-			
+
 			PRJFUNC.mGrp.setTextViewFontScale(btTest);
 			PRJFUNC.mGrp.relayoutView(btTest, LayoutLib.LP_RelativeLayout);
 		}
 
 		dialog.show();
 	}
-	
-/*
- * For Demo Hotel
- * Direct Ordering	
- */
+
+	/*
+	 * For Demo Hotel Direct Ordering
+	 */
 	String pay_type = "";
 	String status = "";
-	
-	private void inserNewOrderForDemo()
-	{
-		//. http://www.roomallocator.com/appcreator/services/insertorder.php?
-		//. hotel_id=18&item_id=22&item_name=mohamed&cust_id=1&qt=5
+
+	private void inserNewOrderForDemo() {
+		// . http://www.roomallocator.com/appcreator/services/insertorder.php?
+		// . hotel_id=18&item_id=22&item_name=mohamed&cust_id=1&qt=5
 		if (NetworkUtils.haveInternet(getActivity())) {
-			
+
 			RequestParams params = new RequestParams();
 			try {
 				params.add("data", getDemoOrderJson().toString());
 			} catch (JSONException e1) {
-				
-				Toast.makeText(getActivity(), "Invalid Order", Toast.LENGTH_LONG).show();
+
+				Toast.makeText(getActivity(), "Invalid Order",
+						Toast.LENGTH_LONG).show();
 				e1.printStackTrace();
 				return;
 			}
-			
-			//data={"hotel_id":126,"email":"miofuture@yahoo.com","customer_id":20,"roomNo":"A204",
-			//"order":[{"itemid":25,"qty":7},{"itemid":13,"qty":3},{"itemid":10,"qty":3}]}
+
+			// data={"hotel_id":126,"email":"miofuture@yahoo.com","customer_id":20,"roomNo":"A204",
+			// "order":[{"itemid":25,"qty":7},{"itemid":13,"qty":3},{"itemid":10,"qty":3}]}
 			String url = "http://www.roomallocator.com/appcreator/services/insertorder.php";
-			DialogUtils.launchProgress(getActivity(), "Please wait while send orders.");
-			/*CustomerHttpClient.post("services/insertorder.php", params, new AsyncHttpResponseHandler() {*/
-			/*CustomerHttpClient.get("services/insertorder.php", params, new AsyncHttpResponseHandler() {*/
-			CustomerHttpClient.getFromFullService(url, params, new AsyncHttpResponseHandler() {
-				
-				boolean success = false;
-				
-				@Override
-				public void onFinish() {
-					
-					DialogUtils.exitProgress();
-					
-					if(success) {
-					}
-					super.onFinish();
-				}
+			DialogUtils.launchProgress(getActivity(),
+					"Please wait while send orders.");
+			/*
+			 * CustomerHttpClient.post("services/insertorder.php", params, new
+			 * AsyncHttpResponseHandler() {
+			 */
+			/*
+			 * CustomerHttpClient.get("services/insertorder.php", params, new
+			 * AsyncHttpResponseHandler() {
+			 */
+			CustomerHttpClient.getFromFullService(url, params,
+					new AsyncHttpResponseHandler() {
 
-				@Override
-				public void onFailure(int statusCode, Header[] headers,	byte[] errorResponse, Throwable e) {
-					
-					Toast.makeText(getActivity(), "Connection was lost (" + statusCode + ")", Toast.LENGTH_LONG).show();
-					super.onFailure(statusCode, headers, errorResponse, e);
-				}
-				
-	            @Override
-	            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-	                // Pull out the first event on the public timeline
-	            	try {
+						boolean success = false;
 
-		            	/*
-		            	 {"status":"true","message":"New Order Added"}	
-		            	*/
+						@Override
+						public void onFinish() {
 
-	            		String result = new String(response);
-	            		result = result.replace("({", "{");
-	            		result = result.replace("})", "}");
-	            		Log.i("HTTP Response <<<", result);
-	            		JSONObject jsonObject = new JSONObject(result);
-	            		String status = jsonObject.getString("status");
+							DialogUtils.exitProgress();
 
-            			if(status.equalsIgnoreCase("success")) {
-            				
-            				String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-        					String c_id = PrefValue.getString(getActivity(), R.string.pref_customer_id);
-        					
-            				LocalOrderListDatabase foodDB = new LocalOrderListDatabase(getActivity());
-            				ArrayList<ReceiptInfo> foodList = foodDB.getFoodItemList(hotel_id, c_id, LocalOrderListDatabase.status_pending); 
-            				if (PrefValue.getBoolean(getActivity(), R.string.pref_app_demo)) {
-            					for (int i=0; i<foodList.size(); i++) {
-            						ReceiptInfo food = foodList.get(i);
-            						foodDB.updateFoodItem(food.id, LocalOrderListDatabase.status_pending);
-            					}
-            				}
-            				
-            				Toast.makeText(getActivity(), "Successfully Ordered",Toast.LENGTH_LONG).show();
-            				// MessageBox.OK(getActivity(), "Alert", "Successfully Ordered");
-	            			success = true;
-	            			((MainActivity)getActivity()).onBackPressed();
-            			} else {
-            				String msg = jsonObject.getString("message");
-            				MessageBox.OK(getActivity(), "Alert", msg);
-            			}
+							if (success) {
+							}
+							super.onFinish();
+						}
 
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Toast.makeText(getActivity(), "Invalid Data",Toast.LENGTH_LONG).show();
-					} 
-	            }
-	        });
+						@Override
+						public void onFailure(int statusCode, Header[] headers,
+								byte[] errorResponse, Throwable e) {
+
+							Toast.makeText(getActivity(),
+									"Connection was lost (" + statusCode + ")",
+									Toast.LENGTH_LONG).show();
+							super.onFailure(statusCode, headers, errorResponse,
+									e);
+						}
+
+						@Override
+						public void onSuccess(int statusCode, Header[] headers,
+								byte[] response) {
+							// Pull out the first event on the public timeline
+							try {
+
+								/*
+								 * {"status":"true","message":"New Order Added"}
+								 */
+
+								String result = new String(response);
+								result = result.replace("({", "{");
+								result = result.replace("})", "}");
+								Log.i("HTTP Response <<<", result);
+								JSONObject jsonObject = new JSONObject(result);
+								String status = jsonObject.getString("status");
+
+								if (status.equalsIgnoreCase("success")) {
+
+									String hotel_id = PrefValue.getString(
+											getActivity(),
+											R.string.pref_hotel_id);
+									String c_id = PrefValue.getString(
+											getActivity(),
+											R.string.pref_customer_id);
+
+									LocalOrderListDatabase foodDB = new LocalOrderListDatabase(
+											getActivity());
+									ArrayList<ReceiptInfo> foodList = foodDB
+											.getFoodItemList(
+													hotel_id,
+													c_id,
+													LocalOrderListDatabase.status_pending);
+									if (PrefValue.getBoolean(getActivity(),
+											R.string.pref_app_demo)) {
+										for (int i = 0; i < foodList.size(); i++) {
+											ReceiptInfo food = foodList.get(i);
+											foodDB.updateFoodItem(
+													food.id,
+													LocalOrderListDatabase.status_pending);
+										}
+									}
+
+									Toast.makeText(getActivity(),
+											"Successfully Ordered",
+											Toast.LENGTH_LONG).show();
+									// MessageBox.OK(getActivity(), "Alert",
+									// "Successfully Ordered");
+									success = true;
+									((MainActivity) getActivity())
+											.onBackPressed();
+								} else {
+									String msg = jsonObject
+											.getString("message");
+									MessageBox.OK(getActivity(), "Alert", msg);
+								}
+
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								Toast.makeText(getActivity(), "Invalid Data",
+										Toast.LENGTH_LONG).show();
+							}
+						}
+					});
 
 		} else {
-			Toast.makeText(getActivity(), "No Internet Connection",Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "No Internet Connection",
+					Toast.LENGTH_LONG).show();
 		}
 	}
-	
-	private JSONObject getDemoOrderJson() throws JSONException
-	{
+
+	private JSONObject getDemoOrderJson() throws JSONException {
 		JSONObject object = new JSONObject();
 
-		//. customer
-		String hotel_id = PrefValue.getString(getActivity(), R.string.pref_hotel_id);
-		String c_id = PrefValue.getString(getActivity(), R.string.pref_customer_id);
-		String c_email_id = PrefValue.getString(getActivity(), R.string.pref_customer_email_id);
-		String order_type = PrefValue.getString(getActivity(), R.string.pref_order_type);
-		String order_code = PrefValue.getString(getActivity(), R.string.pref_order_code);
+		// . customer
+		String hotel_id = PrefValue.getString(getActivity(),
+				R.string.pref_hotel_id);
+		String c_id = PrefValue.getString(getActivity(),
+				R.string.pref_customer_id);
+		String c_email_id = PrefValue.getString(getActivity(),
+				R.string.pref_customer_email_id);
+		String order_type = PrefValue.getString(getActivity(),
+				R.string.pref_order_type);
+		String order_code = PrefValue.getString(getActivity(),
+				R.string.pref_order_code);
 
 		object.put("hotel_id", hotel_id);
 		object.put("email", c_email_id);
 		object.put("customer_id", c_id);
 		object.put("roomNo", etRoomNo.getText().toString());
-		
-		//. orders
+
+		// . orders
 		JSONArray orders = new JSONArray();
-		LocalOrderListDatabase foodDB = new LocalOrderListDatabase(getActivity());
-		ArrayList<ReceiptInfo> foodList = foodDB.getFoodItemList(hotel_id, c_id, LocalOrderListDatabase.status_pending); 
+		LocalOrderListDatabase foodDB = new LocalOrderListDatabase(
+				getActivity());
+		ArrayList<ReceiptInfo> foodList = foodDB.getFoodItemList(hotel_id,
+				c_id, LocalOrderListDatabase.status_pending);
 		if (PrefValue.getBoolean(getActivity(), R.string.pref_app_demo)) {
-			for (int i=0; i<foodList.size(); i++) {
+			for (int i = 0; i < foodList.size(); i++) {
 				ReceiptInfo food = foodList.get(i);
 				JSONObject order = new JSONObject();
 				order.put("itemid", food.id);
@@ -1273,8 +1424,8 @@ public class ItemDetailsFragment extends Fragment {
 			}
 		}
 		object.put("order", orders);
-		
+
 		return object;
 	}
-	
+
 }

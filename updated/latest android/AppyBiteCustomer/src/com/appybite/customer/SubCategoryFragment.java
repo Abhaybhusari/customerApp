@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,17 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appybite.customer.R.id;
 import com.appybite.customer.info.CategoryInfo;
 import com.appybite.customer.info.DepartInfo;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -33,7 +29,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yj.commonlib.network.NetworkUtils;
 import com.yj.commonlib.pref.PrefValue;
 import com.yj.commonlib.screen.PRJFUNC;
-import com.yj.commonlib.ui.HorizontalListView;
 
 public class SubCategoryFragment extends Fragment {
 
@@ -43,6 +38,7 @@ public class SubCategoryFragment extends Fragment {
 	private ListView lvCategoryList;
 	private CategoryListAdapter m_adtCategoryList;
 	private ProgressBar pbCategory;
+	private com.appybite.customer.HorizontalListView horizontalListView;
 
 	public SubCategoryFragment() {
 	}
@@ -50,29 +46,13 @@ public class SubCategoryFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setRetainInstance(true);
 		View v = inflater.inflate(R.layout.frag_subcategory, container, false);
-
+		lvCategoryList = (ListView) v.findViewById(R.id.lvCategoryList);
+		horizontalListView = (HorizontalListView) v
+				.findViewById(R.id.hlvCustomList);
 		updateLCD(v);
 
-		/*
-		 * //RelativeLayout relDataShow =
-		 * (RelativeLayout)v.findViewById(R.id.rlShowDataHori); LinearLayout
-		 * linDataShow = (LinearLayout)v.findViewById(R.id.rlShowDataHori);
-		 * 
-		 * for(int i =0;i<m_adtCategoryList.getCount();i++) {
-		 * 
-		 * // View v1 = new View(getActivity());
-		 * 
-		 * 
-		 * TextView t = null ; t.setText("Hii"); linDataShow.addView(t);
-		 * 
-		 * }
-		 */
-		
-		
-	//	HorizontalListView l = (HorizontalListView)v.findViewById(R.id.listview_hori);
-		//l.setAdapter(m_adtCategoryList);
-		
 		// - update position
 		if (!PRJFUNC.DEFAULT_SCREEN) {
 			scaleView(v);
@@ -85,33 +65,72 @@ public class SubCategoryFragment extends Fragment {
 
 	private void updateLCD(View v) {
 
-		if (PRJFUNC.mGrp == null) {
-			PRJFUNC.resetGraphValue(getActivity());
-		}
+		int orientation = getResources().getConfiguration().orientation;
+		if (orientation == Configuration.ORIENTATION_PORTRAIT) {
 
-		m_adtCategoryList = new CategoryListAdapter(getActivity(),
-				R.layout.item_category, new ArrayList<CategoryInfo>());
-		lvCategoryList = (ListView) v.findViewById(R.id.lvCategoryList);
-		// lvCategoryList.setSelector(new ColorDrawable(Color.TRANSPARENT));
-		lvCategoryList.setCacheColorHint(Color.TRANSPARENT);
-		lvCategoryList.setDividerHeight(0);
-		lvCategoryList.setAdapter(m_adtCategoryList);
-
-		lvCategoryList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
-
-				CategoryInfo categoryInfo = (CategoryInfo) m_adtCategoryList
-						.getItem(position);
-				((MainActivity) getActivity()).goItemList(departInfo,
-						categoryInfo);
+			if (PRJFUNC.mGrp == null) {
+				PRJFUNC.resetGraphValue(getActivity());
 			}
-		});
+			if (horizontalListView != null && lvCategoryList != null) {
+				horizontalListView.setVisibility(View.GONE);
+				lvCategoryList.setVisibility(View.VISIBLE);
 
-		pbCategory = (ProgressBar) v.findViewById(R.id.pbCategory);
-		pbCategory.setVisibility(View.INVISIBLE);
+			}
+			m_adtCategoryList = new CategoryListAdapter(getActivity(),
+					R.layout.item_category, new ArrayList<CategoryInfo>());
+
+			// lvCategoryList.setSelector(new ColorDrawable(Color.TRANSPARENT));
+			lvCategoryList.setCacheColorHint(Color.TRANSPARENT);
+			lvCategoryList.setDividerHeight(0);
+			lvCategoryList.setAdapter(m_adtCategoryList);
+			lvCategoryList.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int position, long arg3) {
+
+					CategoryInfo categoryInfo = (CategoryInfo) m_adtCategoryList
+							.getItem(position);
+					((MainActivity) getActivity()).goItemList(departInfo,
+							categoryInfo);
+				}
+			});
+
+			pbCategory = (ProgressBar) v.findViewById(R.id.pbCategory);
+			pbCategory.setVisibility(View.INVISIBLE);
+		} else {
+			if (PRJFUNC.mGrp == null) {
+				PRJFUNC.resetGraphValue(getActivity());
+			}
+
+			if (lvCategoryList != null && horizontalListView != null) {
+				lvCategoryList.setVisibility(View.GONE);
+				horizontalListView.setVisibility(View.VISIBLE);
+			}
+			m_adtCategoryList = new CategoryListAdapter(getActivity(),
+					R.layout.land_item_category, new ArrayList<CategoryInfo>());
+
+			// lvCategoryList.setSelector(new ColorDrawable(Color.TRANSPARENT));
+			// lvCategoryList.setCacheColorHint(Color.TRANSPARENT);
+			// lvCategoryList.setDividerHeight(0);
+			horizontalListView.setAdapter(m_adtCategoryList);
+			horizontalListView
+					.setOnItemClickListener(new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int position, long arg3) {
+
+							CategoryInfo categoryInfo = (CategoryInfo) m_adtCategoryList
+									.getItem(position);
+							((MainActivity) getActivity()).goItemList(
+									departInfo, categoryInfo);
+						}
+					});
+
+			pbCategory = (ProgressBar) v.findViewById(R.id.pbCategory);
+			pbCategory.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	private void scaleView(View v) {
@@ -211,9 +230,6 @@ public class SubCategoryFragment extends Fragment {
 							item.thumb = object.getString("thumb");
 
 							m_adtCategoryList.add(item);
-							
-							
-							
 						}
 
 					} catch (JSONException e) {

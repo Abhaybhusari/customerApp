@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:layout_toLeftOf="@+id/btGeocoder"
+            android:layout_toLeftOf="@+id/btWeather"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:focusable="false"
@@ -48,16 +48,6 @@
             android:layout_marginRight="@dimen/margin"
             android:layout_toLeftOf="@+id/btMsg"
             android:background="@drawable/weather_sunny"
-            android:textSize="12sp" />
-        
-         <Button
-            android:id="@+id/btGeocoder"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_toLeftOf="@+id/btWeather"
-            android:background="@drawable/bt_geolocater"
             android:textSize="12sp" />
 
         <Button
@@ -88,9 +78,6 @@
             android:layout_marginRight="@dimen/margin"
             android:layout_marginTop="2dp"
             android:background="@drawable/btn_menu" />
-
-       
-
     </RelativeLayout>
 
     <!-- Main Body -->
