@@ -22,6 +22,7 @@
     <string name="pref_hotel_id">hotel_id</string>
     <string name="pref_hotel_name">hotel_name</string>
     <string name="pref_hotel_logo">hotel_logo</string>
+    <string name="pref_hotel_thumb">hotel_thumb</string>
     <string name="pref_hotel_bg">hotel_bg</string>
     <string name="pref_currency">currency</string>
     <string name="pref_hotel_lat">hotel_lat</string>

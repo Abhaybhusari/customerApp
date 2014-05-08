@@ -300,6 +300,8 @@ public class LoginActivity extends Activity {
 								
 								JSONObject hotelImageDetails = jsonObject.getJSONObject("rest_images");
 								String hotelImages = hotelImageDetails.getString("restaurant_image");
+								String restaurantThumb = hotelImageDetails.getString("restaurant_thmb");
+								
 								
 								String appWelcomeDetails = jsonObject.getString("app_welcome");
 //								bundle.putString("appWelcomeDetails", appWelcomeDetails);
@@ -325,7 +327,9 @@ public class LoginActivity extends Activity {
 								// new one
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_welcome_name, appWelcomeDetails);
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_bg, hotelImages);
+								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_background_image, hotelImages);
 								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_logo, hotelLogo);
+								PrefValue.setString(LoginActivity.this, R.string.pref_hotel_thumb, restaurantThumb);
 
 								JSONObject allowedHotelObject = jsonObject.getJSONObject("allowed hotel list");
 								String allowedStatus = allowedHotelObject.getString("status");

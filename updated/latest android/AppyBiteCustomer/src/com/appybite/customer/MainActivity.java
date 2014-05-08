@@ -1259,7 +1259,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 			ImageView ivThumb = (ImageView) item.findViewById(R.id.ivThumb);
 			if (isDemo) {
 				if (value.id == 0) {
-					ivThumb.setImageResource(R.drawable.bg_default_restaurant);
+//					ivThumb.setImageResource(R.drawable.bg_default_restaurant);
+					ImageLoader.getInstance().displayImage(PrefValue.getString(
+							getApplicationContext(), R.string.pref_hotel_thumb),
+							ivThumb, optionsMenuHouse, animateFirstListener);
 				} else if (value.id == 1) {
 					ImageLoader.getInstance().displayImage(value.image,
 							ivThumb, optionsMenuHouse, animateFirstListener);
@@ -1278,7 +1281,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 				}
 			} else {
 				if (value.id == 0) {
-					ivThumb.setImageResource(R.drawable.bg_default_restaurant);
+//					ivThumb.setImageResource(R.drawable.bg_default_restaurant);
+					ImageLoader.getInstance().displayImage(PrefValue.getString(
+							getApplicationContext(), R.string.pref_hotel_thumb),
+							ivThumb, optionsMenuHouse, animateFirstListener);
 				} else if (value.id == 1) {
 					ImageLoader.getInstance().displayImage(value.image,
 							ivThumb, optionsMenuHouse, animateFirstListener);

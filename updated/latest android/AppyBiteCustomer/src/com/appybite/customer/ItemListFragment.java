@@ -8,7 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.appybite.customer.info.AllDepartInfo;
@@ -29,6 +33,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yj.commonlib.dialog.MessageBox;
+import com.yj.commonlib.image.Utils;
 import com.yj.commonlib.network.NetworkUtils;
 import com.yj.commonlib.pref.PrefValue;
 import com.yj.commonlib.screen.PRJFUNC;
@@ -42,6 +47,8 @@ public class ItemListFragment extends Fragment {
 	private ItemListAdapter m_adtItemList;
 	private ProgressBar pbItem;
 	private com.appybite.customer.HorizontalListView horizontalListView;
+	private RelativeLayout rlSubcategory;
+	private boolean loadFlag = false;
 
 	public ItemListFragment() {
 	}
@@ -53,9 +60,14 @@ public class ItemListFragment extends Fragment {
 		Log.e("OnCreate", "onCreate");
 
 		View v = inflater.inflate(R.layout.frag_subcategory, container, false);
+		rlSubcategory = (RelativeLayout) v.findViewById(R.id.rlSubcategory);
 		lvItemList = (ListView) v.findViewById(R.id.lvCategoryList);
 		horizontalListView = (HorizontalListView) v
 				.findViewById(R.id.hlvCustomList);
+		if (!loadFlag) {
+			loadBackgroundImage();
+			loadFlag = true;
+		}
 
 		updateLCD(v);
 
@@ -72,6 +84,39 @@ public class ItemListFragment extends Fragment {
 			loadCategoryList();
 
 		return v;
+	}
+
+	private void loadBackgroundImage() {
+		new AsyncTask<String, Void, String>() {
+			Bitmap bitmap = null;
+
+			@Override
+			protected String doInBackground(String... params) {
+				// TODO Auto-generated method stub
+				try {
+					bitmap = Utils.getBitmapFromURL(PrefValue.getString(
+							getActivity(), R.string.pref_hotel_background_image));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}
+
+			protected void onPostExecute(String result) {
+				try {
+					if (bitmap != null) {
+						rlSubcategory.setBackgroundDrawable(new BitmapDrawable(
+								getResources(), bitmap));
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				super.onPostExecute(result);
+			}
+		}.execute();
+
 	}
 
 	private void updateLCD(View v) {

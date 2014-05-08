@@ -1,5 +1,9 @@
 package com.appybite.customer;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import org.apache.http.Header;
@@ -9,7 +13,10 @@ import org.json.JSONObject;
 
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -33,6 +40,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yj.commonlib.image.AnimateFirstDisplayListener;
+import com.yj.commonlib.image.Utils;
 import com.yj.commonlib.network.NetworkUtils;
 import com.yj.commonlib.pref.PrefValue;
 import com.yj.commonlib.screen.LayoutLib;
@@ -51,6 +59,8 @@ public class DepartFragment extends Fragment {
 	private CategoryListAdapter m_adtCategoryList;
 	private ProgressBar pbCategory;
 	private com.appybite.customer.HorizontalListView horizontalListView;
+	private RelativeLayout rlDepartment;
+	private  boolean loadFlag = false;
 
 	public DepartFragment() {
 	}
@@ -64,6 +74,12 @@ public class DepartFragment extends Fragment {
 		horizontalListView = (com.appybite.customer.HorizontalListView) v
 				.findViewById(R.id.hlvCategoryList);
 		rlDepartInfo = (RelativeLayout) v.findViewById(R.id.rlDepartInfo);
+		rlDepartment = (RelativeLayout) v
+				.findViewById(R.id.mainFragmentContainer);
+		if (!loadFlag) {
+			loadBackgroundImage();
+			loadFlag = true;
+		}
 		updateLCD(v);
 
 		// - update position
@@ -82,6 +98,38 @@ public class DepartFragment extends Fragment {
 		loadCategoryList();
 
 		return v;
+	}
+
+	private void loadBackgroundImage() {
+
+		new AsyncTask<String, Void, String>() {
+			Bitmap bitmap = null;
+
+			@Override
+			protected String doInBackground(String... params) {
+				// TODO Auto-generated method stub
+				Log.e("Check Image Path", "******"+PrefValue.getString(
+						getActivity(), R.string.pref_hotel_background_image));
+				bitmap = Utils.getBitmapFromURL(PrefValue.getString(
+						getActivity(), R.string.pref_hotel_background_image));
+				return null;
+			}
+
+			protected void onPostExecute(String result) {
+
+				try {
+					if (bitmap != null) {
+						rlDepartment.setBackgroundDrawable(new BitmapDrawable(
+								getResources(), bitmap));
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				super.onPostExecute(result);
+			}
+		}.execute();
+
 	}
 
 	private void updateLCD(View v) {
@@ -316,4 +364,5 @@ public class DepartFragment extends Fragment {
 					Toast.LENGTH_LONG).show();
 		}
 	}
+
 }

@@ -14,14 +14,14 @@
     <RelativeLayout
         android:id="@+id/rlLogo"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:alpha="0.5"
         android:background="@color/Black" >
 
         <ImageView
             android:id="@+id/ivHotelLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="@dimen/margin"
             android:contentDescription="@string/hello_world"
             android:scaleType="centerInside" />

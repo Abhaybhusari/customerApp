@@ -519,7 +519,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btLogin=0x7f06000b;
         public static final int btLogout=0x7f06009a;
         public static final int btMenu=0x7f060013;
-        public static final int btMore=0x7f0600db;
+        public static final int btMore=0x7f0600dc;
         public static final int btMsg=0x7f060011;
         public static final int btOk=0x7f06003e;
         public static final int btOldCode=0x7f06002c;
@@ -548,20 +548,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int etPrinterIP=0x7f0600b3;
         public static final int etPrinterPort=0x7f0600b4;
         public static final int etPwd=0x7f06000a;
-        public static final int etRoomNo=0x7f0600da;
+        public static final int etRoomNo=0x7f0600db;
         public static final int etStreet=0x7f060026;
         public static final int etUserName=0x7f060009;
         public static final int fl_fragment_corner=0x7f060014;
         public static final int fl_fragment_youtube=0x7f060016;
         public static final int fullscreen=0x7f060003;
-        public static final int hlvCategoryList=0x7f0600d6;
-        public static final int hlvCustomList=0x7f0600df;
+        public static final int hlvCategoryList=0x7f0600d7;
+        public static final int hlvCustomList=0x7f0600e1;
         public static final int hsDepartList=0x7f060015;
         public static final int hsHotelList=0x7f0600d4;
         public static final int iv1=0x7f06002d;
         public static final int iv2=0x7f060031;
         public static final int ivAboutus=0x7f0600b0;
-        public static final int ivAdditionAccount=0x7f0600dd;
+        public static final int ivAdditionAccount=0x7f0600de;
         public static final int ivAlarm=0x7f0600ad;
         public static final int ivBookTable=0x7f0600a1;
         public static final int ivCheckPrinter=0x7f0600b6;
@@ -598,6 +598,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lvCartList=0x7f06007b;
         public static final int lvCategoryList=0x7f060081;
         public static final int lvMessage=0x7f0600b2;
+        public static final int mainFragmentContainer=0x7f0600d6;
         public static final int margin=0x7f060002;
         public static final int menu_frame=0x7f0600cc;
         public static final int none=0x7f060004;
@@ -618,7 +619,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int right=0x7f060001;
         public static final int rlAboutus=0x7f0600af;
         public static final int rlAddOrderDlg=0x7f060028;
-        public static final int rlAdditionAccount=0x7f0600dc;
+        public static final int rlAdditionAccount=0x7f0600dd;
         public static final int rlAlarm=0x7f0600ac;
         public static final int rlBookTable=0x7f0600a0;
         public static final int rlCart=0x7f060077;
@@ -626,7 +627,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int rlDepartInfo=0x7f06007e;
         public static final int rlExtendStay=0x7f0600a6;
         public static final int rlFavourites=0x7f06009e;
-        public static final int rlHotelInfo=0x7f0600d7;
+        public static final int rlHotelInfo=0x7f0600d8;
         public static final int rlItemInfo=0x7f060042;
         public static final int rlLogo=0x7f060019;
         public static final int rlNewMsg=0x7f060034;
@@ -637,7 +638,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int rlReserveRoom=0x7f0600a3;
         public static final int rlRoomBill=0x7f0600a9;
         public static final int rlSubInfo=0x7f060045;
-        public static final int rlTextParent=0x7f0600e0;
+        public static final int rlSubcategory=0x7f0600e0;
+        public static final int rlTextParent=0x7f0600e2;
         public static final int rlTop=0x7f06001f;
         public static final int rlTopMenu=0x7f06000d;
         public static final int rlWeather=0x7f06001c;
@@ -651,7 +653,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int svCheckTable=0x7f060054;
         public static final int svCheckout=0x7f060065;
         public static final int tvAboutUs=0x7f0600b1;
-        public static final int tvAdditionAccount=0x7f0600de;
+        public static final int tvAdditionAccount=0x7f0600df;
         public static final int tvAddressLabel=0x7f060049;
         public static final int tvAddressValue=0x7f06004a;
         public static final int tvAlarm=0x7f0600ae;
@@ -684,7 +686,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tvExtendStay=0x7f0600a8;
         public static final int tvExtras=0x7f060094;
         public static final int tvFavourites=0x7f06009f;
-        public static final int tvHotelDesc=0x7f0600d8;
+        public static final int tvHotelDesc=0x7f0600d9;
         public static final int tvHotelHeaderName=0x7f0600d2;
         public static final int tvHotelName=0x7f06001b;
         public static final int tvLastUpdate=0x7f0600c2;
@@ -705,7 +707,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tvRegister=0x7f060020;
         public static final int tvReserveRoom=0x7f0600a5;
         public static final int tvRoomBill=0x7f0600ab;
-        public static final int tvRoomNo=0x7f0600d9;
+        public static final int tvRoomNo=0x7f0600da;
         public static final int tvRoomType=0x7f060060;
         public static final int tvTemp=0x7f0600c0;
         public static final int tvTime=0x7f06001d;
@@ -793,14 +795,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int scan=0x7f050000;
     }
     public static final class string {
-        public static final int AppyBit_World=0x7f0a001c;
+        public static final int AppyBit_World=0x7f0a001d;
         public static final int action_settings=0x7f0a0001;
         public static final int app_name=0x7f0a0000;
         public static final int hello_world=0x7f0a0002;
         /**  Pref for Base Info 
          */
         public static final int pref_app_demo=0x7f0a0003;
-        public static final int pref_currency=0x7f0a0012;
+        public static final int pref_currency=0x7f0a0013;
         public static final int pref_customer_address=0x7f0a0006;
         public static final int pref_customer_city=0x7f0a0008;
         public static final int pref_customer_country=0x7f0a000c;
@@ -809,24 +811,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pref_customer_name=0x7f0a0005;
         public static final int pref_customer_p_code=0x7f0a000b;
         public static final int pref_customer_phone=0x7f0a000a;
-        public static final int pref_customer_pwd=0x7f0a001e;
+        public static final int pref_customer_pwd=0x7f0a001f;
         public static final int pref_customer_room_no=0x7f0a000d;
         public static final int pref_customer_state=0x7f0a0007;
-        public static final int pref_hotel_allowed=0x7f0a001f;
-        public static final int pref_hotel_background_image=0x7f0a0016;
-        public static final int pref_hotel_bg=0x7f0a0011;
-        public static final int pref_hotel_first=0x7f0a001d;
+        public static final int pref_hotel_allowed=0x7f0a0020;
+        public static final int pref_hotel_background_image=0x7f0a0017;
+        public static final int pref_hotel_bg=0x7f0a0012;
+        public static final int pref_hotel_first=0x7f0a001e;
         public static final int pref_hotel_id=0x7f0a000e;
-        public static final int pref_hotel_lat=0x7f0a0013;
+        public static final int pref_hotel_lat=0x7f0a0014;
         public static final int pref_hotel_logo=0x7f0a0010;
-        public static final int pref_hotel_lon=0x7f0a0014;
+        public static final int pref_hotel_lon=0x7f0a0015;
         public static final int pref_hotel_name=0x7f0a000f;
-        public static final int pref_hotel_new_logo=0x7f0a0017;
-        public static final int pref_hotel_welcome_name=0x7f0a0015;
-        public static final int pref_order_code=0x7f0a001a;
-        public static final int pref_order_qrcode=0x7f0a0019;
-        public static final int pref_order_type=0x7f0a0018;
-        public static final int pref_room_no=0x7f0a001b;
+        public static final int pref_hotel_new_logo=0x7f0a0018;
+        public static final int pref_hotel_thumb=0x7f0a0011;
+        public static final int pref_hotel_welcome_name=0x7f0a0016;
+        public static final int pref_order_code=0x7f0a001b;
+        public static final int pref_order_qrcode=0x7f0a001a;
+        public static final int pref_order_type=0x7f0a0019;
+        public static final int pref_room_no=0x7f0a001c;
     }
     public static final class style {
         /** 

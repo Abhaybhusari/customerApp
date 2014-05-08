@@ -3,7 +3,9 @@ package com.appybite.customer;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +29,16 @@ public class CategoryListAdapter extends ArrayAdapter<CategoryInfo> {
 	private int ITEM_LAYOUT = -1;
 	private DisplayImageOptions options;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private int orientation =0 ;
+	private DisplayMetrics displaymetrics;
 	
 	public CategoryListAdapter(Context context, int p_res,
 			ArrayList<CategoryInfo> arrayList) {
 		
 		super(context, p_res, arrayList);
-		
+		orientation = context.getResources().getConfiguration().orientation;
+		 displaymetrics = context.getResources()
+				.getDisplayMetrics();
 		m_Context = context;
 		ITEM_LAYOUT = p_res;
 		
@@ -52,7 +58,7 @@ public class CategoryListAdapter extends ArrayAdapter<CategoryInfo> {
 		View item = convertView;
 		final ViewHolder holder;
 
-		// 뷰 설정
+		// ë·° ì„¤ì •
 		if (item == null) {
 			LayoutInflater vi = (LayoutInflater) getContext().getSystemService(
 					Context.LAYOUT_INFLATER_SERVICE);
@@ -64,7 +70,7 @@ public class CategoryListAdapter extends ArrayAdapter<CategoryInfo> {
 		}
 		item.setId(position);
 		
-		// 뷰의 속성값 얻기
+		// ë·°ì�˜ ì†�ì„±ê°’ ì–»ê¸°
 		final CategoryInfo value = getItem(position);
 		if (value == null) {
 			return item;
@@ -77,11 +83,13 @@ public class CategoryListAdapter extends ArrayAdapter<CategoryInfo> {
 
 	// =====================================================================================================
 	/**
-	 * 아이템 UI 요소들
+	 * ì•„ì�´í…œ UI ìš”ì†Œë“¤
 	 */
 	private class ViewHolder {
 
 		public RelativeLayout rlParent;
+		public RelativeLayout rlTextParent;
+		
 		public ImageView ivThumb;
 		public TextView tvTitle;
 		
@@ -91,6 +99,9 @@ public class CategoryListAdapter extends ArrayAdapter<CategoryInfo> {
 			rlParent	= (RelativeLayout) parent.findViewById(R.id.rlParent);
 			ivThumb		= (ImageView) parent.findViewById(R.id.ivThumb);
 			tvTitle 	= (TextView) parent.findViewById(R.id.tvTitle);
+			
+//			if(orientation == Configuration.ORIENTATION_LANDSCAPE)
+				rlTextParent	= (RelativeLayout) parent.findViewById(R.id.rlTextParent);
 			
 			if (!PRJFUNC.DEFAULT_SCREEN) {
 				scaleView(parent);
@@ -104,11 +115,17 @@ public class CategoryListAdapter extends ArrayAdapter<CategoryInfo> {
 			}
 			
 			//. Category
+			if(orientation == Configuration.ORIENTATION_LANDSCAPE && displaymetrics.widthPixels>700){
+			
 			PRJFUNC.mGrp.relayoutView(ivThumb, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.relayoutView(rlParent, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.relayoutView(tvTitle, LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.setTextViewFontScale(tvTitle);
+			PRJFUNC.mGrp.relayoutView(rlTextParent, LayoutLib.LP_RelativeLayout);
+			}
 			
+			
+//			
 			PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowTop), LayoutLib.LP_RelativeLayout);
 			PRJFUNC.mGrp.relayoutView(v.findViewById(R.id.ivShadowBottom), LayoutLib.LP_RelativeLayout);
 		}	

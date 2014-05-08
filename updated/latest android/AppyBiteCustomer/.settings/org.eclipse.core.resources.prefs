@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/com/appybite/customer/AllowedHotels.java=UTF-8
+encoding//src/com/appybite/customer/CategoryListAdapter.java=UTF-8
 encoding//src/com/appybite/customer/ItemListAdapter.java=UTF-8
 encoding//src/com/appybite/customer/MainActivity.java=UTF-8
 encoding//src/com/appybite/customer/db/LocalOrderListDatabase.java=UTF-8

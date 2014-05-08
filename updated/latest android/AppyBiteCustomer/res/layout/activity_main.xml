@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rlTopMenu"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="@color/Black" >
 
         <Button
@@ -110,7 +110,7 @@
         <LinearLayout
             android:id="@+id/llDepartList"
             android:layout_width="wrap_content"
-            android:layout_height="90dp"
+            android:layout_height="80dp"
             android:background="@color/Black"
             android:orientation="horizontal" >
         </LinearLayout>
