@@ -43,6 +43,7 @@ public class MenuFragment extends Fragment {
 		updateLCD(v);
 
 		// - update position
+//fgh
 		if (!PRJFUNC.DEFAULT_SCREEN) {
 			scaleView(v);
 		}

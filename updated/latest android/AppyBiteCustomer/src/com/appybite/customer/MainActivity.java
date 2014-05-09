@@ -449,7 +449,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		ft.hide(fg);
 		ft.commit();
 	}
-
+//hhhh
 	public void goHome() {
 		setTitle("Welcome");
 
