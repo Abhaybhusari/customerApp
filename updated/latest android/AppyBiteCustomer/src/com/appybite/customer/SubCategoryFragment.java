@@ -8,7 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.appybite.customer.info.CategoryInfo;
@@ -26,6 +30,7 @@ import com.appybite.customer.info.DepartInfo;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.yj.commonlib.image.Utils;
 import com.yj.commonlib.network.NetworkUtils;
 import com.yj.commonlib.pref.PrefValue;
 import com.yj.commonlib.screen.PRJFUNC;
@@ -39,6 +44,7 @@ public class SubCategoryFragment extends Fragment {
 	private CategoryListAdapter m_adtCategoryList;
 	private ProgressBar pbCategory;
 	private com.appybite.customer.HorizontalListView horizontalListView;
+	private RelativeLayout rlSubcategory;
 
 	public SubCategoryFragment() {
 	}
@@ -49,8 +55,13 @@ public class SubCategoryFragment extends Fragment {
 		setRetainInstance(true);
 		View v = inflater.inflate(R.layout.frag_subcategory, container, false);
 		lvCategoryList = (ListView) v.findViewById(R.id.lvCategoryList);
+		rlSubcategory = (RelativeLayout) v.findViewById(R.id.rlSubcategory);
 		horizontalListView = (HorizontalListView) v
 				.findViewById(R.id.hlvCustomList);
+
+		if (NetworkUtils.haveInternet(getActivity())) {
+			loadBackgroundImage();
+		}
 		updateLCD(v);
 
 		// - update position
@@ -245,5 +256,40 @@ public class SubCategoryFragment extends Fragment {
 			Toast.makeText(getActivity(), "No Internet Connection",
 					Toast.LENGTH_LONG).show();
 		}
+	}
+
+	private void loadBackgroundImage() {
+
+		new AsyncTask<String, Void, String>() {
+			Bitmap bitmap = null;
+
+			@Override
+			protected String doInBackground(String... params) {
+				// TODO Auto-generated method stub
+
+			//	bitmap = Utils.getBitmapFromURL(PrefValue.getString(
+			//			getActivity(), R.string.pref_hotel_background_image));
+				
+				bitmap = Utils.getBitmapFromURL(PrefValue.getString(getActivity(), R.string.pref_item_bg));
+				
+				Log.e("**Bg Bitmap_subCategeory**",""+PrefValue.getString(getActivity(), R.string.pref_item_bg));
+				return null;
+			}
+
+			protected void onPostExecute(String result) {
+
+				try {
+					if (bitmap != null) {
+						rlSubcategory.setBackgroundDrawable(new BitmapDrawable(
+								getResources(), bitmap));
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				super.onPostExecute(result); 
+			}
+		}.execute();
+
 	}
 }

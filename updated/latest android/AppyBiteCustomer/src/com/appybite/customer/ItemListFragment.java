@@ -64,7 +64,7 @@ public class ItemListFragment extends Fragment {
 		lvItemList = (ListView) v.findViewById(R.id.lvCategoryList);
 		horizontalListView = (HorizontalListView) v
 				.findViewById(R.id.hlvCustomList);
-		if (!loadFlag) {
+		if (!loadFlag && NetworkUtils.haveInternet(getActivity())) {
 			loadBackgroundImage();
 			loadFlag = true;
 		}

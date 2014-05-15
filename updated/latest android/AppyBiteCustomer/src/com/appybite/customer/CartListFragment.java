@@ -851,9 +851,12 @@ public class CartListFragment extends Fragment implements CallbackItemEvent {
 	            		result = result.replace("})", "}");
 	            		Log.i("HTTP Response <<<", result);
 	            		JSONObject jsonObject = new JSONObject(result);
-	            		JSONObject vat = jsonObject.getJSONObject("vat");
-	            		String tax = vat.getString("tax");
-	            		String charge = vat.getString("charge");
+	            	//	JSONObject vat = jsonObject.getJSONObject("vat");
+	            	//	String tax = vat.getString("tax");
+	            	//	String charge = vat.getString("charge");
+	            		
+	            		String tax = "7";
+	            		String charge = "11";
 	            		
 	            		JSONArray printerArray = jsonObject.getJSONArray("printers");
  

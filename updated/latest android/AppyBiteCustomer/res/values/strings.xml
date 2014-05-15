@@ -43,5 +43,7 @@
     <string name="pref_hotel_first">hotel_first</string>
     <string name="pref_customer_pwd">customer_pwd</string>
     <string name="pref_hotel_allowed">hotel_allowed</string>
+    
+    <string name="pref_item_bg">item_bg</string>
 
 </resources>

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:alpha="0.5"
-        android:background="@color/Black" >
+        android:background="@android:color/transparent" >
 
         <ImageView
             android:id="@+id/ivHotelLogo"
@@ -33,7 +33,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="@dimen/margin"
             android:layout_toRightOf="@+id/ivHotelLogo"
-            android:text="Welcome to the"
+            android:text="Welcome to "
             android:textColor="@color/White"
             android:textSize="14sp" />
 

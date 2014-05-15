@@ -328,7 +328,7 @@ public class PrinterFragment extends Fragment {
 				} else {
 					if (WifiPrintDriver.IsNoConnection()) {
 
-						Error = "Connecting to printer failed.";
+						Error = "Connecting to printer failed...";
 					} else {
 						ivCheck.setVisibility(View.VISIBLE);
 						Error = "Connecting to printer success.";

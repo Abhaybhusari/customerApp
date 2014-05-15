@@ -34,7 +34,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="@dimen/margin"
             android:layout_toRightOf="@+id/ivHotelLogo"
-            android:text="Welcome to the"
+            android:text="Welcome to "
             android:textColor="@color/White"
             android:textSize="14sp" />
 

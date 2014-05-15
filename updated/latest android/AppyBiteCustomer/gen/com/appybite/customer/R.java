@@ -826,6 +826,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pref_hotel_new_logo=0x7f0a0018;
         public static final int pref_hotel_thumb=0x7f0a0011;
         public static final int pref_hotel_welcome_name=0x7f0a0016;
+        public static final int pref_item_bg=0x7f0a0021;
         public static final int pref_order_code=0x7f0a001b;
         public static final int pref_order_qrcode=0x7f0a001a;
         public static final int pref_order_type=0x7f0a0019;

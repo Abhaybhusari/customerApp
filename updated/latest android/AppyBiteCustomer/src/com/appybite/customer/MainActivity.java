@@ -63,7 +63,6 @@ import com.yj.commonlib.dialog.MessageBox;
 import com.yj.commonlib.image.AnimateFirstDisplayListener;
 import com.yj.commonlib.network.NetworkUtils;
 import com.yj.commonlib.pref.PrefValue;
-
 import com.yj.commonlib.screen.LayoutLib;
 import com.yj.commonlib.screen.PRJFUNC;
 import com.yj.commonlib.util.DeviceUtil;
@@ -449,7 +448,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		ft.hide(fg);
 		ft.commit();
 	}
-//hhhh
+
 	public void goHome() {
 		setTitle("Welcome");
 
@@ -1063,7 +1062,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 									item.title = object.getString("title");
 									item.desc = object.getString("desc");
 									item.image = object.getString("depimg");
-
+									
+									PrefValue.setString(MainActivity.this, R.string.pref_item_bg,object.getString("depimg"));
+									Log.e("**Bg Bitmap_Mian Activity**",""+PrefValue.getString(getApplicationContext(), R.string.pref_item_bg));
 									aryDepartList.add(item);
 								}
 
@@ -1970,8 +1971,8 @@ public class MainActivity extends SlidingFragmentActivity implements
 		FrameLayout fl = (FrameLayout) findViewById(R.id.fl_fragment_youtube);
 		FragmentManager fm = getSupportFragmentManager();
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			int width = getWindowManager().getDefaultDisplay().getWidth();
-			fl.setLayoutParams(new RelativeLayout.LayoutParams(width / 2, 400));
+			int width = (getWindowManager().getDefaultDisplay().getWidth())/2;
+			fl.setLayoutParams(new RelativeLayout.LayoutParams((width-25), 420));
 		}
 		fl.setVisibility(View.VISIBLE);
 		FragmentTransaction ft = fm.beginTransaction();

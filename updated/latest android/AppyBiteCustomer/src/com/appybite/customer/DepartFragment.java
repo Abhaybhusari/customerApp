@@ -1,19 +1,14 @@
 package com.appybite.customer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
+
 import java.util.ArrayList;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -31,7 +26,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.appybite.customer.info.CategoryInfo;
 import com.appybite.customer.info.DepartInfo;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -61,6 +55,8 @@ public class DepartFragment extends Fragment {
 	private com.appybite.customer.HorizontalListView horizontalListView;
 	private RelativeLayout rlDepartment;
 	private  boolean loadFlag = false;
+	private int orientation;
+	private boolean loadImageFlag= false;
 
 	public DepartFragment() {
 	}
@@ -69,6 +65,7 @@ public class DepartFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setRetainInstance(true);
+		orientation = getResources().getConfiguration().orientation;
 		View v = inflater.inflate(R.layout.frag_depart, container, false);
 		lvCategoryList = (ListView) v.findViewById(R.id.lvCategoryList);
 		horizontalListView = (com.appybite.customer.HorizontalListView) v
@@ -76,10 +73,13 @@ public class DepartFragment extends Fragment {
 		rlDepartInfo = (RelativeLayout) v.findViewById(R.id.rlDepartInfo);
 		rlDepartment = (RelativeLayout) v
 				.findViewById(R.id.mainFragmentContainer);
-		if (!loadFlag) {
+		
+		if (!loadFlag && NetworkUtils.haveInternet(getActivity())) {
 			loadBackgroundImage();
 			loadFlag = true;
-		}
+		} 
+		
+		
 		updateLCD(v);
 
 		// - update position
@@ -88,11 +88,14 @@ public class DepartFragment extends Fragment {
 		}
 
 		// rlDepartInfo.setVisibility(View.VISIBLE);
-		if (departInfo.id > 0)
+		if (departInfo.id > 0){
+			loadImageFlag = true;
 			ImageLoader.getInstance().displayImage(departInfo.image,
 					ivDepartBg, options, animateFirstListener);
-		else
-			ivDepartBg.setImageResource(R.drawable.bg_default_restaurant);
+		}
+//		else
+			
+//			ivDepartBg.setImageResource(R.drawable.bg_default_restaurant);
 		tvDepartDesc.setText(departInfo.desc);
 
 		loadCategoryList();
@@ -115,13 +118,20 @@ public class DepartFragment extends Fragment {
 				return null;
 			}
 
+			@SuppressWarnings("deprecation")
 			protected void onPostExecute(String result) {
 
 				try {
 					if (bitmap != null) {
+						if(orientation == Configuration.ORIENTATION_LANDSCAPE)
 						rlDepartment.setBackgroundDrawable(new BitmapDrawable(
 								getResources(), bitmap));
+						else
+							if(!loadImageFlag)
+							ivDepartBg.setImageBitmap(bitmap);
 					}
+						
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -134,7 +144,7 @@ public class DepartFragment extends Fragment {
 
 	private void updateLCD(View v) {
 
-		int orientation = getResources().getConfiguration().orientation;
+	
 		if (orientation == Configuration.ORIENTATION_PORTRAIT) {
 
 			if (PRJFUNC.mGrp == null) {
